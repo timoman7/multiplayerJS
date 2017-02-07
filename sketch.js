@@ -45,7 +45,7 @@ var x=0;
 var y=0;
 function setup() {
 	can = createCanvas(800,800);
-	var defCode = "x = 0;\ny = 0;\nfunction keyPressed(event){\nif(event.key == \"a\"){\nx-=5;\n}\nif(event.key == \"d\"){\nx+=5;\n}\nif(event.key == \"s\"){\ny+=5;\n}\nif(event.key == \"w\"){\ny-=5;\n}\n}\n";
+	var defCode = "function keyPressed(event){\nif(event.key == \"a\"){\nx-=5;\n}\nif(event.key == \"d\"){\nx+=5;\n}\nif(event.key == \"s\"){\ny+=5;\n}\nif(event.key == \"w\"){\ny-=5;\n}\n}\n";
 	myCode = createInput(defCode);
 	myCode.id("myCode");
 	myCode.elt.outerHTML=myCode.elt.outerHTML.replace(/input/g,"textarea")+"</textarea>";
