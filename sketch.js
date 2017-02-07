@@ -48,14 +48,16 @@ var y=0;
 function setup() {
 	can = createCanvas(800,800);
 	var defCode = "function draw2(){\nif(keyIsDown(LEFT_ARROW)){\nx-=0.05;\n}\nif(keyIsDown(RIGHT_ARROW)){\nx+=0.05;\n}\nif(keyIsDown(DOWN_ARROW)){\ny+=0.05;\n}\n\nif(keyIsDown(UP_ARROW)){\ny-=0.05;\n}\n}";
-	if(users[currentUser.uid].code !== defCode){
-		defCode = users[currentUser.uid].code;
-	}
-	if(users[currentUser.uid].x !== x){
-		x = users[currentUser.uid].x;
-	}
-	if(users[currentUser.uid].y !== y){
-		y = users[currentUser.uid].y;
+	if(currentUser){
+		if(users[currentUser.uid].code !== defCode){
+			defCode = users[currentUser.uid].code;
+		}
+		if(users[currentUser.uid].x !== x){
+			x = users[currentUser.uid].x;
+		}
+		if(users[currentUser.uid].y !== y){
+			y = users[currentUser.uid].y;
+		}
 	}
 	myCode = createInput(defCode);
 	myCode.id("myCode");
