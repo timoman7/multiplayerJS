@@ -102,7 +102,7 @@ function draw() {
 	}
 	if(triedToUpdate){
 		try{
-			if(document.getElementById("myCode").value.includes("function draw2()"){
+			if(document.getElementById("myCode").value.includes("function draw2()")){
 				var curV=document.getElementById("myCode").value;
 				window.eval(curV.substr(0,curV.indexOf("function draw2()"));
 				var newDraw2=curV.substr(curV.indexOf("function draw2()"),curV.length);
