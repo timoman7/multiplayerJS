@@ -46,5 +46,7 @@ function draw() {
 	}catch(err){
 		println("Error: "+err);
 	}
-	updateData(x,y,myCode.html());
+	if(currentUser){
+		updateData(x,y,myCode.html());
+	}
 }
