@@ -31,21 +31,29 @@ function updateData(x,y,code){
 		globalVariables:globalVariables
 	});
 }
-var can;
-var myCode;
-var x=0;
-var y=0;
-function setup() {
-	can = createCanvas(800,800);
-	myCode = createInput("x = 0;\ny = 0;\nfunction keyPressed(event){\nif(event.key == \"a\"){\nx-=5;\n}\nif(event.key == \"d\"){\nx+=5;\n}\nif(event.key == \"s\"){\ny+=5;\n}\nif(event.key == \"w\"){\ny-=5;\n}\n}\n");
-}
-function draw() {
-	background(200);
+function updateCode(){
 	try{
 		eval(myCode.html());
 	}catch(err){
 		println("Error: "+err);
 	}
+}
+var can;
+var myCode;
+var updateBtn;
+var x=0;
+var y=0;
+function setup() {
+	can = createCanvas(800,800);
+	myCode = createInput("x = 0;\ny = 0;\nfunction keyPressed(event){\nif(event.key == \"a\"){\nx-=5;\n}\nif(event.key == \"d\"){\nx+=5;\n}\nif(event.key == \"s\"){\ny+=5;\n}\nif(event.key == \"w\"){\ny-=5;\n}\n}\n");
+	myCode.size(400,400);
+	myCode.position(820,0);
+	updateBtn = createBtn("Update");
+	updateBtn.position(820,420);
+	updateBtn.mouseClicked(updateCode);
+}
+function draw() {
+	background(200);
 	if(currentUser){
 		updateData(x,y,myCode.html());
 	}
