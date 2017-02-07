@@ -48,7 +48,7 @@ var x=0;
 var y=0;
 function setup() {
 	can = createCanvas(800,800);
-	var defCode = "function draw2(){\nif(keyIsDown(LEFT_ARROW)){\nx-=0.05;\n}\nif(keyIsDown(RIGHT_ARROW)){\nx+=0.05;\n}\nif(keyIsDown(DOWN_ARROW)){\ny+=0.05;\n}\n\nif(keyIsDown(UP_ARROW)){\ny-=0.05;\n}\n}";
+	var defCode = "function draw2(){\nif(keyIsDown(LEFT_ARROW)){\nx-=2;\n}\nif(keyIsDown(RIGHT_ARROW)){\nx+=2;\n}\nif(keyIsDown(DOWN_ARROW)){\ny+=2;\n}\n\nif(keyIsDown(UP_ARROW)){\ny-=2;\n}\n}";
 	if(currentUser){
 		if(users[currentUser.uid].code !== defCode){
 			defCode = users[currentUser.uid].code;
