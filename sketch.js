@@ -70,7 +70,7 @@ function draw() {
 		}catch(err){
 			triedToUpdate=false;
 			errCon.show();
-			errCon.html("Error: "+err+"\n"+errCon.html())
+			errCon.html("Error: "+err+"<br>"+errCon.html())
 		}
 	}
 }
