@@ -42,7 +42,7 @@ var x=0;
 var y=0;
 function setup() {
 	can = createCanvas(800,800);
-	myCode = createInput("x = 0;\ny = 0;\nfunction keyPressed(event){\nif(event.key == \"a\"){\nx-=5;\n}\nif(event.key == \"d\"){\nx+=5;\n}\nif(event.key == \"s\"){\ny+=5;\n}\nif(event.key == \"w\"){\ny-=5;\n}\n}\n");
+	myCode = createInput("x = 0;\ny = 0;\nfunction keyPressed(event){\nif(event.key == \"a\"){\nx-=5;\n}\nif(event.key == \"d\"){\nx+=5;\n}\nif(event.key == \"s\"){\ny+=5;\n}\nif(event.key == \"w\"){\ny-=5;\n}\n}\n","textarea");
 	myCode.size(400,400);
 	myCode.position(820,0);
 	updateBtn = createButton("Update");
