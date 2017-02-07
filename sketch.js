@@ -47,7 +47,16 @@ var x=0;
 var y=0;
 function setup() {
 	can = createCanvas(800,800);
-	var defCode = "function keyPressed(event){\nif(event.key == \"a\"){\nx-=5;\n}\nif(event.key == \"d\"){\nx+=5;\n}\nif(event.key == \"s\"){\ny+=5;\n}\nif(event.key == \"w\"){\ny-=5;\n}\n}\n";
+	var defCode = "function draw2(){\nif(keyIsDown(LEFT_ARROW)){\nx-=0.05;\n}\nif(keyIsDown(RIGHT_ARROW)){\nx+=0.05;\n}\nif(keyIsDown(DOWN_ARROW)){\ny+=0.05;\n}\n\nif(keyIsDown(UP_ARROW)){\ny-=0.05;\n}\n}";
+	if(users[currentUser.uid].code !== defCode){
+		defCode = users[currentUser.uid].code;
+	}
+	if(users[currentUser.uid].x !== x){
+		x = users[currentUser.uid].x;
+	}
+	if(users[currentUser.uid].y !== y){
+		y = users[currentUser.uid].y;
+	}
 	myCode = createInput(defCode);
 	myCode.id("myCode");
 	myCode.elt.outerHTML=myCode.elt.outerHTML.replace(/input/g,"textarea")+"</textarea>";
@@ -80,5 +89,8 @@ function draw() {
 	for(var i in users){
 		ellipse(users[i].x,users[i].y,20,20);
 		text(users[i].name,users[i].x,users[i].y);
+	}
+	if(draw2){
+		draw2();
 	}
 }
