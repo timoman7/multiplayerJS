@@ -126,7 +126,7 @@ function draw() {
 	for(var i in users){
 		ellipse(users[i].x,users[i].y,20,20);
 		text(users[i].name,users[i].x,users[i].y);
-		if(i !== uid){
+		if(i !== currentUser.uid){
 			window.eval(users[i].draw2Code);
 		}
 	}
