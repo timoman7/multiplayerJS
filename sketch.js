@@ -19,10 +19,11 @@ firebase.database().ref('/users').once('value').then(
     users = snapshot.val();
   }
 );
+var can;
 function setup() {
-  
+  can = createCanvas(800,800);
 }
 
 function draw() {
-  
+  background(200);
 }
