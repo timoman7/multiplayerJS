@@ -1,5 +1,6 @@
 var currentUser;
 var users;
+var started = false;
 var globalVariables=[];
 firebase.auth().getRedirectResult().then(function(result){
 		var user = result.user;
@@ -75,6 +76,19 @@ function setup() {
 }
 function draw() {
 	background(200);
+	if(!started){
+		if(currentUser){
+			if(users[currentUser.uid].code !== defCode){
+				defCode = users[currentUser.uid].code;
+			}
+			if(users[currentUser.uid].x !== x){
+				x = users[currentUser.uid].x;
+			}
+			if(users[currentUser.uid].y !== y){
+				y = users[currentUser.uid].y;
+			}
+		}
+	}
 	if(triedToUpdate){
 		try{
 			window.eval(document.getElementById("myCode").value);
@@ -95,4 +109,5 @@ function draw() {
 	if(draw2){
 		draw2();
 	}
+	started = true;
 }
