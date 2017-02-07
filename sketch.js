@@ -31,12 +31,9 @@ function updateData(x,y,code){
 		globalVariables:globalVariables
 	});
 }
+var triedToUpdate=false;
 function updateCode(){
-	try{
-		eval(myCode.html());
-	}catch(err){
-		println("Error: "+err);
-	}
+	triedToUpdate=true;
 }
 var can;
 var myCode;
@@ -48,13 +45,21 @@ function setup() {
 	myCode = createInput("x = 0;\ny = 0;\nfunction keyPressed(event){\nif(event.key == \"a\"){\nx-=5;\n}\nif(event.key == \"d\"){\nx+=5;\n}\nif(event.key == \"s\"){\ny+=5;\n}\nif(event.key == \"w\"){\ny-=5;\n}\n}\n");
 	myCode.size(400,400);
 	myCode.position(820,0);
-	updateBtn = createBtn("Update");
+	updateBtn = createButton("Update");
 	updateBtn.position(820,420);
 	updateBtn.mouseClicked(updateCode);
 }
 function draw() {
 	background(200);
-	if(currentUser){
-		updateData(x,y,myCode.html());
+	if(triedToUpdate){
+		try{
+			eval(myCode.html());
+			if(currentUser){
+				updateData(x,y,myCode.html());
+			}
+		}catch(err){
+			println("Error: "+err);
+			triedToUpdate=false;
+		}
 	}
 }
