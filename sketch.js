@@ -107,7 +107,7 @@ function draw() {
 				window.eval(curV.substr(0,curV.indexOf("function draw2()")));
 				var newDraw2=curV.substr(curV.indexOf("function draw2()"),curV.length);
 				if(currentUser){
-					updateData(x,y,curV.substr(0,curV.indexOf("function draw2()"),newDraw2);
+					updateData(x,y,curV.substr(0,curV.indexOf("function draw2()")),newDraw2);
 				}
 			}else{
 				window.eval(document.getElementById("myCode").value);
