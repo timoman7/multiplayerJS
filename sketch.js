@@ -63,7 +63,7 @@ function draw() {
 	background(200);
 	if(triedToUpdate){
 		try{
-			eval(document.getElementById("myCode").value);
+			window.eval(document.getElementById("myCode").value);
 			if(currentUser){
 				updateData(x,y,document.getElementById("myCode").value);
 			}
