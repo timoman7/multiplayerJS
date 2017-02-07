@@ -38,6 +38,7 @@ function updateCode(){
 }
 var can;
 var myCode;
+var errCon;
 var updateBtn;
 var x=0;
 var y=0;
@@ -54,6 +55,9 @@ function setup() {
 	updateBtn = createButton("Update");
 	updateBtn.position(820,420);
 	updateBtn.mouseClicked(updateCode);
+	errCon = createP();
+	errCon.position(820,440);
+	errCon.hide();
 }
 function draw() {
 	background(200);
@@ -64,8 +68,9 @@ function draw() {
 				updateData(x,y,document.getElementById("myCode").value);
 			}
 		}catch(err){
-			println("Error: "+err);
 			triedToUpdate=false;
+			errCon.show();
+			errCon.html("Error: "+err+"\n"+errCon.html())
 		}
 	}
 }
