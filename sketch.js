@@ -26,14 +26,25 @@ function checkUsers(){
 function addVar(newVar,value){
 	globalVariables[newVar]=value;
 }
-function updateData(x,y,code){
-	firebase.database().ref('/users/'+currentUser.uid).set({
-		x:x,
-		y:y,
-		name:currentUser.displayName,
-		code:code,
-		globalVariables:globalVariables
-	});
+function updateData(x,y,code,draw2Code){
+	if(draw2Code){
+		firebase.database().ref('/users/'+currentUser.uid).set({
+			x:x,
+			y:y,
+			name:currentUser.displayName,
+			draw2Code:draw2Code,
+			code:code,
+			globalVariables:globalVariables
+		});
+	}else{
+		firebase.database().ref('/users/'+currentUser.uid).set({
+			x:x,
+			y:y,
+			name:currentUser.displayName,
+			code:code,
+			globalVariables:globalVariables
+		});
+	}
 }
 var triedToUpdate=true;
 function updateCode(){
@@ -91,9 +102,18 @@ function draw() {
 	}
 	if(triedToUpdate){
 		try{
-			window.eval(document.getElementById("myCode").value);
-			if(currentUser){
-				updateData(x,y,document.getElementById("myCode").value);
+			if(document.getElementById("myCode").value.includes("function draw2()"){
+				var curV=document.getElementById("myCode").value;
+				window.eval(curV.substr(0,curV.indexOf("function draw2()"));
+				var newDraw2=curV.substr(curV.indexOf("function draw2()"),curV.length);
+				if(currentUser){
+					updateData(x,y,curV.substr(0,curV.indexOf("function draw2()"),newDraw2);
+				}
+			}else{
+				window.eval(document.getElementById("myCode").value);
+				if(currentUser){
+					updateData(x,y,document.getElementById("myCode").value);
+				}
 			}
 		}catch(err){
 			triedToUpdate=false;
@@ -105,6 +125,9 @@ function draw() {
 	for(var i in users){
 		ellipse(users[i].x,users[i].y,20,20);
 		text(users[i].name,users[i].x,users[i].y);
+		if(i !== uid){
+			window.eval(users[i].draw2Code);
+		}
 	}
 	if(draw2){
 		draw2();
