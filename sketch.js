@@ -31,8 +31,9 @@ function updateData(x,y,code){
 		globalVariables:globalVariables
 	});
 }
-var triedToUpdate=false;
+var triedToUpdate=true;
 function updateCode(){
+	//document.getElementById("myCode").value=document.getElementById("myCode").value.replace(/var/g,);
 	triedToUpdate=true;
 }
 var can;
