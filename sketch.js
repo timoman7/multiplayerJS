@@ -33,6 +33,14 @@ function updateData(x,y,code){
 }
 var triedToUpdate=false;
 function updateCode(){
+	try{
+		eval(myCode.html());
+		if(currentUser){
+			updateData(x,y,myCode.html());
+		}
+	}catch(err){
+		println("Error: "+err);
+	}
 	triedToUpdate=true;
 }
 var can;
