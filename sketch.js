@@ -119,7 +119,7 @@ function draw() {
 		}catch(err){
 			triedToUpdate=false;
 			errCon.show();
-			errCon.html("Error: "+err+"<br>"+errCon.html())
+			errCon.html("Error: "+err+"<br>"+errCon.html());
 		}
 	}
 	checkUsers();
@@ -127,7 +127,12 @@ function draw() {
 		ellipse(users[i].x,users[i].y,20,20);
 		text(users[i].name,users[i].x,users[i].y);
 		if(i !== currentUser.uid){
-			window.eval(users[i].draw2Code);
+			try{
+				window.eval(users[i].draw2Code);
+			}catch(err){
+				errCon.show();
+				errCon.html("User "+users[i].name+" caused an error: "+err+"<br>"+errCon.html());
+			}
 		}
 	}
 	if(draw2){
