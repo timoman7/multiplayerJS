@@ -33,14 +33,6 @@ function updateData(x,y,code){
 }
 var triedToUpdate=false;
 function updateCode(){
-	try{
-		eval(myCode.html());
-		if(currentUser){
-			updateData(x,y,myCode.html());
-		}
-	}catch(err){
-		println("Error: "+err);
-	}
 	triedToUpdate=true;
 }
 var can;
@@ -55,7 +47,7 @@ function setup() {
 	myCode.id("myCode");
 	myCode.elt.outerHTML=myCode.elt.outerHTML.replace(/input/g,"textarea")+"</textarea>";
 	myCode.elt=document.getElementById("myCode");
-	myCode.html(defCode);
+	document.getElementById("myCode").innerHTML=defCode;
 	myCode.size(400,400);
 	myCode.position(820,0);
 	updateBtn = createButton("Update");
@@ -66,9 +58,9 @@ function draw() {
 	background(200);
 	if(triedToUpdate){
 		try{
-			eval(myCode.html());
+			eval(document.getElementById("myCode").innerHTML);
 			if(currentUser){
-				updateData(x,y,myCode.html());
+				updateData(x,y,document.getElementById("myCode").innerHTML);
 			}
 		}catch(err){
 			println("Error: "+err);
