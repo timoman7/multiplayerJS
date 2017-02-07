@@ -47,7 +47,7 @@ function setup() {
 	myCode.id("myCode");
 	myCode.elt.outerHTML=myCode.elt.outerHTML.replace(/input/g,"textarea")+"</textarea>";
 	myCode.elt=document.getElementById("myCode");
-	document.getElementById("myCode").innerHTML=defCode;
+	document.getElementById("myCode").value=defCode;
 	myCode.size(400,400);
 	myCode.position(820,0);
 	updateBtn = createButton("Update");
@@ -58,9 +58,9 @@ function draw() {
 	background(200);
 	if(triedToUpdate){
 		try{
-			eval(document.getElementById("myCode").innerHTML);
+			eval(document.getElementById("myCode").value);
 			if(currentUser){
-				updateData(x,y,document.getElementById("myCode").innerHTML);
+				updateData(x,y,document.getElementById("myCode").value);
 			}
 		}catch(err){
 			println("Error: "+err);
