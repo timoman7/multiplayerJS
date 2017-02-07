@@ -1,5 +1,6 @@
 var currentUser;
 var users;
+var draw2;
 var started = false;
 var globalVariables=[];
 firebase.auth().getRedirectResult().then(function(result){
