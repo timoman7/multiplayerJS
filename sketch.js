@@ -15,11 +15,13 @@ firebase.auth().getRedirectResult().then(function(result){
     var email = error.email;
     var credential = error.credential;
 });
-firebase.database().ref('/users/').once('value').then(
-  function(snapshot){
-    users = snapshot.val();
-  }
-);
+function checkUsers(){
+	firebase.database().ref('/users/').once('value').then(
+	  function(snapshot){
+	    users = snapshot.val();
+	  }
+	);
+}
 function addVar(newVar,value){
 	globalVariables[newVar]=value;
 }
@@ -74,6 +76,7 @@ function draw() {
 			errCon.html("Error: "+err+"<br>"+errCon.html())
 		}
 	}
+	checkUsers();
 	for(var i in users){
 		ellipse(users[i].x,users[i].y,20,20);
 		text(users[i].name,users[i].x,users[i].y);
