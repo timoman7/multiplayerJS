@@ -27,6 +27,7 @@ function updateData(x,y,code){
 	firebase.database().ref('/users/'+currentUser.uid).set({
 		x:x,
 		y:y,
+		name:currentUser.displayName,
 		code:code,
 		globalVariables:globalVariables
 	});
@@ -72,5 +73,9 @@ function draw() {
 			errCon.show();
 			errCon.html("Error: "+err+"<br>"+errCon.html())
 		}
+	}
+	for(var i in users){
+		ellipse(users[i].x,users[i].y,20,20);
+		text(users[i].name,users[i].x,users[i].y);
 	}
 }
