@@ -92,7 +92,9 @@ function setup() {
 }
 function draw() {
 	background(200);
-	visUid.html(currentUser.uid);
+	if(currentUser){
+		visUid.html(currentUser.uid);
+	}
 	if(!started){
 		if(currentUser){
 			if(users[currentUser.uid].code !== defCode){
