@@ -106,6 +106,8 @@ function draw() {
 			if(document.getElementById("myCode").value.includes("function draw2()")){
 				var curV=document.getElementById("myCode").value;
 				if(curV.includes("window.open") || curV.includes("open(\'") || curV.includes("open(\"")){
+					
+				}else{
 					window.eval(curV.substr(0,curV.indexOf("function draw2()")));
 					var newDraw2=curV.substr(curV.indexOf("function draw2()"),curV.length);
 					if(currentUser){
