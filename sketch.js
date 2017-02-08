@@ -56,10 +56,12 @@ var can;
 var myCode;
 var errCon;
 var updateBtn;
+var visUid;
 var x=0;
 var y=0;
 function setup() {
 	can = createCanvas(800,800);
+	visUid = createP("None");
 	var defCode = "function draw2(){\nif(keyIsDown(LEFT_ARROW)){\nx-=2;\n}\nif(keyIsDown(RIGHT_ARROW)){\nx+=2;\n}\nif(keyIsDown(DOWN_ARROW)){\ny+=2;\n}\n\nif(keyIsDown(UP_ARROW)){\ny-=2;\n}\n}";
 	if(currentUser){
 		if(users[currentUser.uid].code !== defCode){
@@ -74,6 +76,8 @@ function setup() {
 	}
 	myCode = createInput(defCode);
 	myCode.id("myCode");
+	visUid.id("uid");
+	visUid.position(900,420);
 	myCode.elt.outerHTML=myCode.elt.outerHTML.replace(/input/g,"textarea")+"</textarea>";
 	myCode.elt=document.getElementById("myCode");
 	document.getElementById("myCode").value=defCode;
@@ -88,6 +92,7 @@ function setup() {
 }
 function draw() {
 	background(200);
+	visUid.html(currentUser.uid);
 	if(!started){
 		if(currentUser){
 			if(users[currentUser.uid].code !== defCode){
