@@ -96,6 +96,7 @@ function draw() {
 		visUid.html(currentUser.uid);
 	}
 	if(!started){
+		checkUsers();
 		triedToUpdate=false;
 		if(currentUser){
 			if(users[currentUser.uid].code !== defCode){
