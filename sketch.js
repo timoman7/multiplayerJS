@@ -99,18 +99,20 @@ function draw() {
 		checkUsers();
 		triedToUpdate=false;
 		if(currentUser){
-			if(users[currentUser.uid]){
-				if(users[currentUser.uid].code !== defCode){
-					defCode = users[currentUser.uid].code;
+			if(users){
+				if(users[currentUser.uid]){
+					if(users[currentUser.uid].code !== defCode){
+						defCode = users[currentUser.uid].code;
+					}
+					if(users[currentUser.uid].x !== x){
+						x = users[currentUser.uid].x;
+					}
+					if(users[currentUser.uid].y !== y){
+						y = users[currentUser.uid].y;
+					}
 				}
-				if(users[currentUser.uid].x !== x){
-					x = users[currentUser.uid].x;
-				}
-				if(users[currentUser.uid].y !== y){
-					y = users[currentUser.uid].y;
-				}
+				started=true;
 			}
-			started=true;
 		}
 	}
 	if(started){
