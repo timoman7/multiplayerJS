@@ -57,12 +57,13 @@ var myCode;
 var errCon;
 var updateBtn;
 var visUid;
+var defCode;
 var x=0;
 var y=0;
 function setup() {
 	can = createCanvas(800,800);
 	visUid = createP("None");
-	var defCode = "if(keyIsDown(LEFT_ARROW)){\nx-=2;\n}\nif(keyIsDown(RIGHT_ARROW)){\nx+=2;\n}\nif(keyIsDown(DOWN_ARROW)){\ny+=2;\n}\n\nif(keyIsDown(UP_ARROW)){\ny-=2;\n}";
+	defCode = "if(keyIsDown(LEFT_ARROW)){\nx-=2;\n}\nif(keyIsDown(RIGHT_ARROW)){\nx+=2;\n}\nif(keyIsDown(DOWN_ARROW)){\ny+=2;\n}\n\nif(keyIsDown(UP_ARROW)){\ny-=2;\n}";
 	if(currentUser){
 		if(users[currentUser.uid].code !== defCode){
 			defCode = users[currentUser.uid].code;
@@ -103,6 +104,11 @@ function draw() {
 				if(users[currentUser.uid]){
 					if(users[currentUser.uid].code !== defCode){
 						defCode = users[currentUser.uid].code;
+						if(users[currentUser.uid].draw2Code){
+							document.getElementById("myCode").value=defCode+"\n"+users[currentUser.uid].draw2Code;
+						}else{
+							document.getElementById("myCode").value=defCode;
+						}
 					}
 					if(users[currentUser.uid].x !== x){
 						x = users[currentUser.uid].x;
