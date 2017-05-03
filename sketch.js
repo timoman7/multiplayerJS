@@ -1263,7 +1263,6 @@ rocket_explode = getSound("retro/boom2");
 //Starting stuff
 state="game";
 dbug = false;
-/*
 bg = color(200);
 gravity = createVector(0,1);
 enemyBullet={
@@ -1311,6 +1310,7 @@ rocketBullet={
     fire_sound:rocket_sound,
     hit_sound:rocket_explode,
 };
+/*
   //Bullets
   // Gun creation
 // x, y, bullet speed, bullet damage, radius, detection range
