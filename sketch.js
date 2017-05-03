@@ -1,5 +1,5 @@
 //ERROR TAKES PLACE IN SETUP
-var globals, keys, mouse, buttons, platforms, f, fp, fps, framerate, framess, bullet_sound, bullet_hit, rocket_sound, rocket_explode, state, dbug, gravity, bg, player, test, testPlat, testPlat2, Tau, enemyBullet, minigunBullet, defaultBullet, rocketBullet, p1c, setBG, backToMenu, backToMenu2, backToMenu3, playGame, helpBtn, testDrop, bgR, bgG, bgB, bgrP1Btn, bgrP5Btn, bgrP10Btn, bgrM1Btn, bgrM5Btn, bgrM10Btn, bggP1Btn, bggP5Btn, bggP10Btn, bggM1Btn, bggM5Btn, bggM10Btn, bgbP1Btn, bgbP5Btn, bgbP10Btn, bgbM1Btn, bgbM5Btn, bgbM10Btn;
+var globals, allBullets, keys, mouse, buttons, platforms, f, fp, fps, framerate, framess, bullet_sound, bullet_hit, rocket_sound, rocket_explode, state, dbug, gravity, bg, player, test, testPlat, testPlat2, Tau, enemyBullet, minigunBullet, defaultBullet, rocketBullet, p1c, setBG, backToMenu, backToMenu2, backToMenu3, playGame, helpBtn, testDrop, bgR, bgG, bgB, bgrP1Btn, bgrP5Btn, bgrP10Btn, bgrM1Btn, bgrM5Btn, bgrM10Btn, bggP1Btn, bggP5Btn, bggP10Btn, bggM1Btn, bggM5Btn, bggM10Btn, bgbP1Btn, bgbP5Btn, bgbP10Btn, bgbM1Btn, bgbM5Btn, bgbM10Btn;
 //Sin angle / hyp = Y
 //Cos angle / hyp = X
 function playSound(theSound){
@@ -823,7 +823,7 @@ function findClosest(origin){
         return closestObj;
     }
 }
-function Entity(x,y,radius,name,maxHP,bullet){
+function Entity(x,y,radius,name,maxHP,bullet,isPlayer,mainPlayer){
     var nameCount = 0;
     var potentialName = name;
     for(var i = 0; i < globals.length; i++){
@@ -837,7 +837,8 @@ function Entity(x,y,radius,name,maxHP,bullet){
     }else{
         this.id = name;
     }
-    this.bullet=bullet || defaultBullet;
+	this.bulletName = bullet || "defaultBullet";
+    this.bullet=allBullets[this.bulletName];
     this.bullets=[];
     this.radius=radius;
     this.pos = createVector(x,y);
@@ -1065,6 +1066,39 @@ function Entity(x,y,radius,name,maxHP,bullet){
             this.collide("v");
         }
     };
+	if(this.isPlayer && !this.mainPlayer){
+		firebase.database().ref("arcade/users/"+currentUser.uid).on('value',function(data){
+			this.HP=data.HP;
+			this.Projectiles=data.Projectiles;
+			this.acc=createVector(data.acc.x,data.acc.y,data.acc.z);
+			this.angle=data.angle;
+			this.bulletName = data.bulletName;
+			this.bullet=allBullets[data.bulletName];
+			this.canJump=data.canJump;
+			this.colliding=data.colliding;
+			this.collisionPointY=data.collisionPointX;
+			this.collisionPointY=data.collisionPointY;
+			this.controls=data.controls;
+			this.crosshair = createVector(data.crosshair.x,data.crosshair.y,data.crosshair.z);
+			this.fireDelay=data.fireDelay;
+			this.fireX=data.fireX;
+			this.fireY=data.fireY;
+			this.fired=data.fired;
+			this.hasControls=data.hasControls;
+			this.isPlayer=data.isPlayer;
+			this.mainPlayer:false;
+			this.hyp=data.hyp;
+			this.id = data.id;
+			this.jumpCount=data.jumpCount;
+			this.jumpForce = createVector(data.jumpForce.x,data.jumpForce.y,data.jumpForce.z);
+			this.maxHP=data.maxHP;
+			this.maxJumps=data.maxJumps;
+			this.pos = createVector(data.pos.x,data.pos.y,data.pos.z);
+			this.radius=data.radius;
+			this.target = createVector(data.target.x,data.target.y,data.target.z);
+			this.vel = createVector(data.vel.x,data.vel.y,data.vel.z);
+		});
+	}
 	this.updateDatabase=function(){
 		if(currentUser){
 			firebase.database().ref("arcade/users/"+currentUser.uid).set({});
@@ -1077,8 +1111,7 @@ function Entity(x,y,radius,name,maxHP,bullet){
 					z:this.acc.z,
 				},
 				angle:this.angle,
-				bullet:this.bullet,
-				bullets:this.bullets,
+				bulletName:this.bulletName,
 				canJump:this.canJump,
 				colliding:this.colliding,
 				collisionPointX:this.collisionPointX,
@@ -1157,7 +1190,7 @@ function Entity(x,y,radius,name,maxHP,bullet){
 	    if(this.isPlayer && this.mainPlayer){
 	    	this.updateDatabase();
 	    }
-        if(this.hasControls){
+        if(this.hasControls && this.mainPlayer){
             this.aim(this.crosshair.x,this.crosshair.y);
             for(var control in this.controls){
                 if(this.controls[control].isKey){
@@ -1292,7 +1325,8 @@ state="game";
 dbug = false;
 bg = color(200);
 gravity = createVector(0,1);
-enemyBullet={
+allBullets={
+enemyBullet:{
     speed:8,
     damage:0,
     rate:300000,
@@ -1302,8 +1336,8 @@ enemyBullet={
     force:2,
     fire_sound:bullet_sound,
     hit_sound:bullet_hit,
-};
-minigunBullet={
+},
+minigunBullet:{
     speed:15,
     damage:1,
     rate:3,
@@ -1313,8 +1347,8 @@ minigunBullet={
     force:0.5,
     fire_sound:bullet_sound,
     hit_sound:bullet_hit,
-};
-defaultBullet={
+},
+defaultBullet:{
     speed:10,
     damage:5,
     rate:15,
@@ -1324,8 +1358,8 @@ defaultBullet={
     force:2,
     fire_sound:bullet_sound,
     hit_sound:bullet_hit,
-};
-rocketBullet={
+},
+rocketBullet:{
     speed:10,
     damage:1,
     rate:100,
@@ -1336,7 +1370,7 @@ rocketBullet={
     radius:250,
     fire_sound:rocket_sound,
     hit_sound:rocket_explode,
-};
+}};
   //Bullets
   // Gun creation
 // x, y, bullet speed, bullet damage, radius, detection range
@@ -1537,6 +1571,7 @@ p1c = {
         isMouse:false,
         a:1,
         func:function(ent){
+		ent.bulletName="minigunBullet";
             ent.bullet=minigunBullet;
         },
     },
@@ -1546,6 +1581,7 @@ p1c = {
         isMouse:false,
         a:1,
         func:function(ent){
+		ent.bulletName="defaultBullet";
             ent.bullet=defaultBullet;
         },
     },
@@ -1555,6 +1591,7 @@ p1c = {
         isMouse:false,
         a:1,
         func:function(ent){
+		ent.bulletName="rocketBullet";
             ent.bullet=rocketBullet;
         },
     },
