@@ -1520,7 +1520,7 @@ p1c = {
         },
     },
     goRight:{
-        name:39,
+        name:68,
         isKey:true,
         isMouse:false,
         a:1,
