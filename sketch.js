@@ -1662,8 +1662,22 @@ function checkPlayers(){
 	if(currentUser){
 		for(var j = 0; j < globals.length; j++){
 			var newUser = false;
+			var userPlacement = 0;
 			for(var i = 0; i < users.length; i++){
-				if(users[i].id !== currentUser.uid && globals[j].id !== 
+				if(users[i].id !== currentUser.uid && globals[j].id !== users[i].id && !newUser){
+					newUser = true;
+					userPlacement = i;
+				}
+			}
+			if(newUser){
+				new Entity(
+					users[userPlacement].pos.x,		//X Position
+					users[userPlacement].pos.y,		//Y Position
+					users[userPlacement].radius,		//Radius of body
+					users[userPlacement].id,		//ID of user
+					users[userPlacement].bulletName,	//Name of bullet
+					users[userPlacement].isPlayer,		//Is a player: Most likely
+					users[userPlacement].mainPlayer);	//Is main player: NO
 			}
 		}
 	}
