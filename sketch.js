@@ -1251,8 +1251,8 @@ mouse=[];
 buttons = [];
 platforms = [];
 f = 0;
-/*
 fp = 0;
+/*
 fps = 0;
 framerate = 0;
 frames = 0;
