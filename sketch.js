@@ -1072,7 +1072,7 @@ function Entity(x,y,radius,name,maxHP,bullet,isPlayer,mainPlayer){
 		firebase.database().ref("arcade/users/"+currentUser.uid).on('value',function(data){
 			var data2 = data.val();
 			this.HP=data2.HP;
-			this.Projectiles=data2.Projectiles;
+			this.Projectiles=JSON.parse(data2.Projectiles);
 			this.acc=createVector(data2.acc.x,data2.acc.y,data2.acc.z);
 			this.angle=data2.angle;
 			this.bulletName = data2.bulletName;
@@ -1108,7 +1108,7 @@ function Entity(x,y,radius,name,maxHP,bullet,isPlayer,mainPlayer){
 			firebase.database().ref("arcade/users/"+currentUser.uid).set({});
 			firebase.database().ref("arcade/users/"+currentUser.uid).set({
 				HP:this.HP,
-				Projectiles:this.Projectiles,
+				Projectiles:JSON.stringify(this.Projectiles),
 				acc:{
 					x:this.acc.x,
 					y:this.acc.y,
