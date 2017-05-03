@@ -1,7 +1,8 @@
 //ERROR TAKES PLACE IN SETUP
-var globals, allBullets, keys, mouse, buttons, platforms, f, fp, fps, framerate, framess, bullet_sound, bullet_hit, rocket_sound, rocket_explode, state, dbug, gravity, bg, player, test, testPlat, testPlat2, Tau, enemyBullet, minigunBullet, defaultBullet, rocketBullet, p1c, setBG, backToMenu, backToMenu2, backToMenu3, playGame, helpBtn, testDrop, bgR, bgG, bgB, bgrP1Btn, bgrP5Btn, bgrP10Btn, bgrM1Btn, bgrM5Btn, bgrM10Btn, bggP1Btn, bggP5Btn, bggP10Btn, bggM1Btn, bggM5Btn, bggM10Btn, bgbP1Btn, bgbP5Btn, bgbP10Btn, bgbM1Btn, bgbM5Btn, bgbM10Btn;
+var globals, allBullets, users, keys, mouse, buttons, platforms, f, fp, fps, framerate, framess, bullet_sound, bullet_hit, rocket_sound, rocket_explode, state, dbug, gravity, bg, player, test, testPlat, testPlat2, Tau, enemyBullet, minigunBullet, defaultBullet, rocketBullet, p1c, setBG, backToMenu, backToMenu2, backToMenu3, playGame, helpBtn, testDrop, bgR, bgG, bgB, bgrP1Btn, bgrP5Btn, bgrP10Btn, bgrM1Btn, bgrM5Btn, bgrM10Btn, bggP1Btn, bggP5Btn, bggP10Btn, bggM1Btn, bggM5Btn, bggM10Btn, bgbP1Btn, bgbP5Btn, bgbP10Btn, bgbM1Btn, bgbM5Btn, bgbM10Btn;
 //Sin angle / hyp = Y
 //Cos angle / hyp = X
+firebase.database().ref('arcade/users').on('value',function(data){console.log(data);});
 function playSound(theSound){
   if(theSound.isLoaded()){
   	theSound.play();
@@ -1657,8 +1658,23 @@ function bckground(){
     text("Red: "+bgR+"\nGreen: "+bgG+"\nBlue: "+bgB,(width/2)-80,(height/5)+240);
     textAlign(LEFT,BASELINE);
 }//Background
+function checkPlayers(){
+	if(currentUser){
+		for(var j = 0; j < globals.length; j++){
+			var newUser = false;
+			for(var i = 0; i < users.length; i++){
+				if(users[i].id !== currentUser.uid && globals[j].id !== 
+			}
+		}
+	}
+}
 function draw(){
     try{
+	if(player){
+		if(currentUser){
+			player.id = currentUser.uid;
+		}
+	}
         background(bg);
         fpsScript();
         fill(255);
@@ -1666,6 +1682,7 @@ function draw(){
         if(state === "menu"){
             
         }else if(state === "game"){
+		checkPlayers();
             game();
         }else if(state === "help"){
             help();
