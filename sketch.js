@@ -1508,7 +1508,7 @@ backToMenu3 = new Button(50,16,100,32,"<- Menu","background",function(){state = 
 //Create UI
 p1c = {
     goLeft:{
-        name:37,
+        name:65,
         isKey:true,
         isMouse:false,
         a:1,
@@ -1532,7 +1532,7 @@ p1c = {
         },
     },
     goUp:{
-        name:38,
+        name:87,
         isKey:true,
         isMouse:false,
         a:1,
@@ -1545,7 +1545,7 @@ p1c = {
         },
     },
     goDown:{
-        name:40,
+        name:83,
         isKey:true,
         isMouse:false,
         a:1,
@@ -1556,46 +1556,20 @@ p1c = {
             }
         },
     },
-    aimUp:{
-        name:87,
-        isKey:true,
-        isMouse:false,
-        a:1,
-        func:function(ent){
-            ent.crosshair.y -= 2;
-        },
-    },
-    aimDown:{
-        name:83,
-        isKey:true,
-        isMouse:false,
-        a:1,
-        func:function(ent){
-            ent.crosshair.y += 2;
-        },
-    },
-    aimLeft:{
-        name:65,
-        isKey:true,
-        isMouse:false,
-        a:1,
-        func:function(ent){
-            ent.crosshair.x -= 2;
-        },
-    },
-    aimRight:{
-        name:68,
-        isKey:true,
-        isMouse:false,
-        a:1,
-        func:function(ent){
-            ent.crosshair.x += 2;
-        },
-    },
     fire:{
         name:32,
         isKey:true,
         isMouse:false,
+        a:1,
+        func:function(ent){
+            ent.aim(ent.target.x,ent.target.y);
+            ent.fire();
+        },
+    },
+    fireMouse:{
+        name:'left',
+        isKey:false,
+        isMouse:true,
         a:1,
         func:function(ent){
             ent.aim(ent.target.x,ent.target.y);
