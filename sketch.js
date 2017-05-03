@@ -1071,7 +1071,11 @@ function Entity(x,y,radius,name,maxHP,bullet){
 			firebase.database().ref("arcade/users/"+currentUser.uid).set({
 				HP:this.HP,
 				Projectiles:this.Projectiles,
-				acc:this.acc,
+				acc:{
+					x:this.acc.x,
+					y:this.acc.y,
+					z:this.acc.z,
+				},
 				angle:this.angle,
 				bounce:this.bounce,
 				bullet:this.bullet,
@@ -1081,7 +1085,11 @@ function Entity(x,y,radius,name,maxHP,bullet){
 				collisionPointX:this.collisionPointX,
 				collisionPointY:this.collisionPointY,
 				controls:this.controls,
-				crosshair:this.crosshair,
+				crosshair:{
+					x:this.crosshair.x,
+					y:this.crosshair.y,
+					z:this.crosshair.z,
+				},
 				fireDelay:this.fireDelay,
 				fireX:this.fireX,
 				fireY:this.fireY,
@@ -1092,15 +1100,39 @@ function Entity(x,y,radius,name,maxHP,bullet){
 				hyp:this.hyp,
 				id:this.id,
 				jumpCount:this.jumpCount,
-				jumpForce:this.jumpForce,
+				jumpForce:{
+					x:this.jumpForce.x,
+					y:this.jumpForce.y,
+					z:this.jumpForce.z,
+				},
 				maxHP:this.maxHP,
 				maxJumps:this.maxJumps,
-				pos:this.pos,
+				pos:{
+					x:this.pos.x,
+					y:this.pos.y,
+					z:this.pos.z,
+				},
 				radius:this.radius,
-				repel:this.repel,
-				target:this.target,
-				tempVel:this.tempVel,
-				vel:this.vel
+				repel:{
+					x:this.repel.x,
+					y:this.repel.y,
+					z:this.repel.z,
+				},
+				target:{
+					x:this.target.x,
+					y:this.target.y,
+					z:this.target.z,
+				},
+				tempVel:{
+					x:this.tempVel.x,
+					y:this.tempVel.y,
+					z:this.tempVel.z,
+				},
+				vel:{
+					x:this.vel.x,
+					y:this.vel.y,
+					z:this.vel.z,
+				}
 			});
 		}
 	}
