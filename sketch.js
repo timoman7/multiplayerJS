@@ -1066,40 +1066,42 @@ function Entity(x,y,radius,name,maxHP,bullet){
         }
     };
 	this.updateDatabase=function(){
-		firebase.database().ref("arcade/users/"+currentUser.uid).set({
-			HP:this.HP,
-			Projectiles:this.Projectiles,
-			acc:this.acc,
-			angle:this.angle,
-			bounce:this.bounce,
-			bullet:this.bullet,
-			bullets:this.bullets,
-			canJump:this.canJump,
-			colliding:this.colliding,
-			collisionPointX:this.collisionPointX,
-			collisionPointY:this.collisionPointY,
-			controls:this.controls,
-			crosshair:this.crosshair,
-			fireDelay:this.fireDelay,
-			fireX:this.fireX,
-			fireY:this.fireY,
-			fired:this.fired,
-			hasControls:this.hasControls,
-			isPlayer:this.isPlayer,
-			mainPlayer:false,
-			hyp:this.hyp,
-			id:this.id,
-			jumpCount:this.jumpCount,
-			jumpForce:this.jumpForce,
-			maxHP:this.maxHP,
-			maxJumps:this.maxJumps,
-			pos:this.pos,
-			radius:this.radius,
-			repel:this.repel,
-			target:this.target,
-			tempVel:this.tempVel,
-			vel:this.vel
-		});
+		if(currentUser){
+			firebase.database().ref("arcade/users/"+currentUser.uid).set({
+				HP:this.HP,
+				Projectiles:this.Projectiles,
+				acc:this.acc,
+				angle:this.angle,
+				bounce:this.bounce,
+				bullet:this.bullet,
+				bullets:this.bullets,
+				canJump:this.canJump,
+				colliding:this.colliding,
+				collisionPointX:this.collisionPointX,
+				collisionPointY:this.collisionPointY,
+				controls:this.controls,
+				crosshair:this.crosshair,
+				fireDelay:this.fireDelay,
+				fireX:this.fireX,
+				fireY:this.fireY,
+				fired:this.fired,
+				hasControls:this.hasControls,
+				isPlayer:this.isPlayer,
+				mainPlayer:false,
+				hyp:this.hyp,
+				id:this.id,
+				jumpCount:this.jumpCount,
+				jumpForce:this.jumpForce,
+				maxHP:this.maxHP,
+				maxJumps:this.maxJumps,
+				pos:this.pos,
+				radius:this.radius,
+				repel:this.repel,
+				target:this.target,
+				tempVel:this.tempVel,
+				vel:this.vel
+			});
+		}
 	}
     this.update=function(){
         this.applyForce(gravity);
