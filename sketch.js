@@ -1115,8 +1115,8 @@ function Entity(x,y,radius,name,maxHP,bullet,isPlayer,mainPlayer){
 				bulletName:this.bulletName,
 				canJump:this.canJump,
 				colliding:this.colliding,
-				collisionPointX:this.collisionPointX,
-				collisionPointY:this.collisionPointY,
+				collisionPointX:this.collisionPointX || 0,
+				collisionPointY:this.collisionPointY || 0,
 				controls:this.controls,
 				crosshair:{
 					x:this.crosshair.x,
