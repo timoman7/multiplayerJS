@@ -1,4 +1,3 @@
-/*
 var currentUser;
 setInterval(function(){
 	if(currentUser){
@@ -18,9 +17,6 @@ firebase.auth().getRedirectResult().then(function(result){
 	var user = result.user;
 	var credential = result.credential;
 	if(user === null){
-		var provider;
-		provider = new firebase.auth.GoogleAuthProvider();
-		firebase.auth().signInWithRedirect(provider);
 	}else{
 		currentUser = firebase.auth().currentUser;
 	}
@@ -28,7 +24,11 @@ firebase.auth().getRedirectResult().then(function(result){
 	var email = error.email;
 	var credential = error.credential;
 });
-
+function signInWithGoogle(){
+	var provider;
+	provider = new firebase.auth.GoogleAuthProvider();
+	firebase.auth().signInWithRedirect(provider);
+}
 function signOut(){
 	firebase.auth().signOut().then(function() {
 		location.reload();
@@ -38,4 +38,3 @@ function signOut(){
 		alert("Somehow you screwed up logging out.");
 	});
 }
-*/
