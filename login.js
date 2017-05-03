@@ -1,5 +1,6 @@
+/*
 var currentUser;
-/*setInterval(function(){
+setInterval(function(){
 	if(currentUser){
 		var logoutbtn = $(".Logout");
 		logoutbtn.show();
@@ -11,7 +12,7 @@ var currentUser;
 		var loginbtns = $(".Login");
 		loginbtns.show();
 	}
-},100);*/
+},100);
 
 firebase.auth().getRedirectResult().then(function(result){
 	var user = result.user;
@@ -37,3 +38,4 @@ function signOut(){
 		alert("Somehow you screwed up logging out.");
 	});
 }
+*/
