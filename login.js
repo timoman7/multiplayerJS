@@ -1,5 +1,4 @@
 var currentUser;
-var googleProvider;
 setInterval(function(){
 	if(currentUser){
 		var logoutbtn = $(".Logout");
@@ -17,7 +16,7 @@ setInterval(function(){
 firebase.auth().getRedirectResult().then(function(result){
 	var user = result.user;
 	var credential = result.credential;
-	if(user===null){
+	if(user === null){
 		var provider;
 		provider = new firebase.auth.GoogleAuthProvider();
 		provider.addScope('https://www.googleapis.com/auth/plus.login');
@@ -39,6 +38,3 @@ function signOut(){
 		alert("Somehow you screwed up logging out.");
 	});
 }
-window.onload = function(){
-	initApp();
-};
