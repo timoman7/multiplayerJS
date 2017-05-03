@@ -1098,6 +1098,7 @@ function Entity(x,y,radius,name,maxHP,bullet,isPlayer,mainPlayer){
 			this.target = createVector(data.target.x,data.target.y,data.target.z);
 			this.vel = createVector(data.vel.x,data.vel.y,data.vel.z);
 		});
+		
 	}
 	this.updateDatabase=function(){
 		if(currentUser){
