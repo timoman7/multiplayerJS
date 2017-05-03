@@ -1508,7 +1508,8 @@ backToMenu3 = new Button(50,16,100,32,"<- Menu","background",function(){state = 
 //Create UI
 function mouseMoved(){
 	if(player){
-		player.aim(mouseX,mouseY);
+		player.crosshair.x=mouseX;
+		player.crosshair.y=mouseY;
 	}
 }
 p1c = {
