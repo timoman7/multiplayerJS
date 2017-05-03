@@ -1077,7 +1077,6 @@ function Entity(x,y,radius,name,maxHP,bullet){
 					z:this.acc.z,
 				},
 				angle:this.angle,
-				bounce:this.bounce,
 				bullet:this.bullet,
 				bullets:this.bullets,
 				canJump:this.canJump,
@@ -1098,7 +1097,7 @@ function Entity(x,y,radius,name,maxHP,bullet){
 				isPlayer:this.isPlayer,
 				mainPlayer:false,
 				hyp:this.hyp,
-				id:this.id,
+				id:currentUser.uid,
 				jumpCount:this.jumpCount,
 				jumpForce:{
 					x:this.jumpForce.x,
@@ -1113,20 +1112,10 @@ function Entity(x,y,radius,name,maxHP,bullet){
 					z:this.pos.z,
 				},
 				radius:this.radius,
-				repel:{
-					x:this.repel.x,
-					y:this.repel.y,
-					z:this.repel.z,
-				},
 				target:{
 					x:this.target.x,
 					y:this.target.y,
 					z:this.target.z,
-				},
-				tempVel:{
-					x:this.tempVel.x,
-					y:this.tempVel.y,
-					z:this.tempVel.z,
 				},
 				vel:{
 					x:this.vel.x,
