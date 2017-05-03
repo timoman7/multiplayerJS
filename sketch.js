@@ -1472,7 +1472,11 @@ backToMenu = new Button(50,16,100,32,"<- Menu","game",function(){state = "menu";
 backToMenu2 = new Button(50,16,100,32,"<- Menu","help",function(){state = "menu";});
 backToMenu3 = new Button(50,16,100,32,"<- Menu","background",function(){state = "menu";});
 //Create UI
-
+function mouseMoved(){
+	if(player){
+		player.aim(mouseX,mouseY);
+	}
+}
 p1c = {
     goLeft:{
         name:37,
@@ -1576,7 +1580,7 @@ p1c = {
         a:1,
         func:function(ent){
 		ent.bulletName="minigunBullet";
-            ent.bullet=minigunBullet;
+            ent.bullet=allBullets["minigunBullet"];
         },
     },
     setGun_pistol:{
@@ -1586,7 +1590,7 @@ p1c = {
         a:1,
         func:function(ent){
 		ent.bulletName="defaultBullet";
-            ent.bullet=defaultBullet;
+            ent.bullet=allBullets["defaultBullet"];
         },
     },
     setGun_rocket:{
@@ -1596,7 +1600,7 @@ p1c = {
         a:1,
         func:function(ent){
 		ent.bulletName="rocketBullet";
-            ent.bullet=rocketBullet;
+            ent.bullet=allBullets["rocketBullet"];
         },
     },
 };//P1 Controls
