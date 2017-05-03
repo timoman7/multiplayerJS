@@ -583,7 +583,7 @@ function Gun(x,y,bullet,radius,range,maxHP,name){
 	this.bulletName = bullet;
     this.bullet=allBullets[this.bulletName];
     this.fired=[];
-    this.fired[allBulets[this.bulletName].name]=false;
+    this.fired[allBullets[this.bulletName].name]=false;
     this.fireDelay=[];
     this.fireDelay[this.bullet.name]=0;
     this.Projectiles = [];
@@ -849,7 +849,7 @@ function Entity(x,y,radius,name,maxHP,bullet,isPlayer,mainPlayer){
     this.hasControls=false;
     this.Projectiles=[];
     this.fired=[];
-    this.fired[allBulets[this.bulletName].name]=false;
+    this.fired[allBullets[this.bulletName].name]=false;
     this.fireDelay=[];
     this.fireDelay[this.bullet.name]=0;
     this.crosshair=createVector(mouseX,mouseY);
