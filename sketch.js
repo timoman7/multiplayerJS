@@ -410,9 +410,10 @@ function blastForce(bullet,hit){
     this.force.mult(this.bullet.force);
     return this.force;
 }
-function Projectile(target,bullet,chumber,id){
+function Projectile(target,bulletName,chumber,id){
     this.id=id;
-    this.bullet=bullet;
+	this.bulletName = bulletName;
+    this.bullet=allBullets[this.bulletName];
     this.speed=this.bullet.speed;
     this.damage=this.bullet.damage;
     this.type=this.bullet.type;
@@ -604,7 +605,7 @@ function Gun(x,y,bullet,radius,range,maxHP,name){
         if(!this.fired[this.bullet.name]){
             this.Projectiles.push(new Projectile(
                 this.target,
-                this.bullet,
+                this.bulletName,
                 this,
                 frameCount
             ));
@@ -887,7 +888,7 @@ function Entity(x,y,radius,name,maxHP,bullet,isPlayer,mainPlayer){
         if(!this.fired[this.bullet.name]){
             this.Projectiles.push(new Projectile(
                 this.target,
-                this.bullet,
+                this.bulletName,
                 this,
                 frameCount
             ));
@@ -1106,6 +1107,40 @@ function Entity(x,y,radius,name,maxHP,bullet,isPlayer,mainPlayer){
 	this.updateDatabase=function(){
 		if(currentUser){
 			firebase.database().ref("arcade/users/"+currentUser.uid).set({});
+			var tempProjectiles=[];
+			for(var i = 0;; i < this.Projectiles.length; i++){
+				var tp = this.Projectiles[i];
+				tempProjectiles.push({
+					pos:{
+						x:tp.pos.x,
+						y:tp.pos.y,
+						z:tp.pos.z
+					},
+					angle:tp.angle,
+					angleDif:tp.angleDif,
+					bulletName:tp.bulletName,
+					damage:tp.damage,
+					fireVel:{
+						x:tp.fireVel.x,
+						y:tp.fireVel.y,
+						z:tp.fireVel.z,
+					},
+					fireX:tp.fireX,
+					fireY:tp.fireY,
+					fullAngle:tp.fullAngle,
+					hyp:tp.hyp,
+					id:tp.id,
+					invAccuracy:tp.invAccuracy,
+					radDif:tp.radDif,
+					speed:tp.speed,
+					target:{
+						x:tp.target.x,
+						y:tp.target.y,
+						z:tp.target.z
+					},
+					type:tp.type
+				});
+			}
 			firebase.database().ref("arcade/users/"+currentUser.uid).set({
 				HP:this.HP,
 				Projectiles:JSON.stringify(this.Projectiles),
