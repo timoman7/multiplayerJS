@@ -13,7 +13,13 @@
         storageBucket: "multiplayerjs.appspot.com",
         messagingSenderId: "429156673777"
       };
-      firebase.initializeApp(config);
+      firebase.initializeApp({
+        apiKey: "AIzaSyAmLcJwWo7TUOH8AqdhYyDZGPrK9FWOyVg",
+        authDomain: "multiplayerjs.firebaseapp.com",
+        databaseURL: "https://multiplayerjs.firebaseio.com",
+        storageBucket: "multiplayerjs.appspot.com",
+        messagingSenderId: "429156673777"
+      });
     </script>
     <script src="jquery-3.2.1.min.js"></script>
     <script src="libraries/p5.js" type="text/javascript"></script>
@@ -23,11 +29,11 @@
   </head>
   <body>
     <div id="Button_Holder" style="background-color: RGBA(0,0,0,0); right: 0px; top: 0px; position:absolute; z-index:25;">
-      <a class="Login" onClick="signInWithGoogle(); return false;">
+      <a class="Login" onclick="signInWithGoogle(); return false;">
         <button>Sign in with Google</button>
       </a>
       <br>
-      <a class="Logout" style = "top: 0px; z-index: 26" onClick="signOut(); return false;">
+      <a class="Logout" style = "top: 0px; z-index: 26" onclick="signOut(); return false;">
         <button>Log out</button>
       </a>
     </div>
