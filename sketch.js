@@ -1079,7 +1079,6 @@ function Entity(x,y,radius,name,maxHP,bullet,isPlayer,mainPlayer){
 			this.colliding=data.colliding;
 			this.collisionPointX=data.collisionPointX || 0;
 			this.collisionPointY=data.collisionPointY || 0;
-			this.controls=data.controls;
 			this.crosshair = createVector(data.crosshair.x,data.crosshair.y,data.crosshair.z);
 			this.fireDelay=data.fireDelay;
 			this.fireX=data.fireX;
@@ -1117,7 +1116,6 @@ function Entity(x,y,radius,name,maxHP,bullet,isPlayer,mainPlayer){
 				colliding:this.colliding,
 				collisionPointX:this.collisionPointX || 0,
 				collisionPointY:this.collisionPointY || 0,
-				controls:this.controls,
 				crosshair:{
 					x:this.crosshair.x,
 					y:this.crosshair.y,
