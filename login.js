@@ -1,5 +1,5 @@
 var currentUser;
-setInterval(function(){
+/*setInterval(function(){
 	if(currentUser){
 		var logoutbtn = $(".Logout");
 		logoutbtn.show();
@@ -11,7 +11,7 @@ setInterval(function(){
 		var loginbtns = $(".Login");
 		loginbtns.show();
 	}
-},100);
+},100);*/
 
 firebase.auth().getRedirectResult().then(function(result){
 	var user = result.user;
@@ -19,7 +19,6 @@ firebase.auth().getRedirectResult().then(function(result){
 	if(user === null){
 		var provider;
 		provider = new firebase.auth.GoogleAuthProvider();
-		provider.addScope('https://www.googleapis.com/auth/plus.login');
 		firebase.auth().signInWithRedirect(provider);
 	}else{
 		currentUser = firebase.auth().currentUser;
