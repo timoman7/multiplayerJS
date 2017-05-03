@@ -1067,6 +1067,7 @@ function Entity(x,y,radius,name,maxHP,bullet){
     };
 	this.updateDatabase=function(){
 		if(currentUser){
+			firebase.database().ref("arcade/users/"+currentUser.uid).set({});
 			firebase.database().ref("arcade/users/"+currentUser.uid).set({
 				HP:this.HP,
 				Projectiles:this.Projectiles,
