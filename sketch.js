@@ -583,7 +583,7 @@ function Gun(x,y,bullet,radius,range,maxHP,name){
 	this.bulletName = bullet;
     this.bullet=allBullets[this.bulletName];
     this.fired=[];
-    this.fired[this.bullet.name]=false;
+    this.fired[allBulets[this.bulletName].name]=false;
     this.fireDelay=[];
     this.fireDelay[this.bullet.name]=0;
     this.Projectiles = [];
@@ -849,8 +849,7 @@ function Entity(x,y,radius,name,maxHP,bullet,isPlayer,mainPlayer){
     this.hasControls=false;
     this.Projectiles=[];
     this.fired=[];
-    console.log(this.bullet);
-    this.fired[this.bullet.name]=false;
+    this.fired[allBulets[this.bulletName].name]=false;
     this.fireDelay=[];
     this.fireDelay[this.bullet.name]=0;
     this.crosshair=createVector(mouseX,mouseY);
@@ -1677,15 +1676,15 @@ function checkPlayers(){
 					}
 				}
 				if(newUser){
-					console.log(users[userPlacement]);
-// 					new Entity(
-// 						users[userPlacement].pos.x,		//X Position
-// 						users[userPlacement].pos.y,		//Y Position
-// 						users[userPlacement].radius,		//Radius of body
-// 						users[userPlacement].id,		//ID of user
-// 						users[userPlacement].bulletName,	//Name of bullet
-// 						users[userPlacement].isPlayer,		//Is a player: Most likely
-// 						users[userPlacement].mainPlayer);	//Is main player: NO
+//					console.log(users[userPlacement]);
+ 					new Entity(
+ 						users[userPlacement].pos.x,		//X Position
+ 						users[userPlacement].pos.y,		//Y Position
+ 						users[userPlacement].radius,		//Radius of body
+ 						users[userPlacement].id,		//ID of user
+ 						users[userPlacement].bulletName,	//Name of bullet
+ 						users[userPlacement].isPlayer,		//Is a player: Most likely
+ 						users[userPlacement].mainPlayer);	//Is main player: NO
 				}
 			}
 		}
