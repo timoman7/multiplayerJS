@@ -1250,12 +1250,13 @@ keys=[];
 mouse=[];
 buttons = [];
 platforms = [];
+/*
 f = 0;
 fp = 0;
 fps = 0;
 framerate = 0;
 frames = 0;
-/*
+	
 bullet_sound = getSound("rpg/hit-splat");
 bullet_hit = getSound("rpg/hit-whack");
 rocket_sound = getSound("retro/thruster-short");
