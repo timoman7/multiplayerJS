@@ -1338,6 +1338,7 @@ function mouseReleased(){
 
 function setup(){
   createCanvas(600,600);
+	frameRate(60);
   colorMode(RGB);
   angleMode(DEGREES);
 Math.Tau=Math.PI*2;
