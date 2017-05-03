@@ -1240,7 +1240,6 @@ function mouseReleased(){
 //Mouse & Key Events
 
 function setup(){
-	try{
   createCanvas(600,600);
   colorMode(RGB);
   angleMode(DEGREES);
@@ -1264,7 +1263,7 @@ rocket_explode = getSound("retro/boom2");
 //Starting stuff
 state="game";
 dbug = false;
-
+/*
 bg = color(200);
 gravity = createVector(0,1);
 enemyBullet={
@@ -1535,9 +1534,7 @@ p1c = {
     },
 };//P1 Controls
 player.setControls(p1c);
-	}catch(err){
-	console.log(err);
-	}
+*/
 }
 /*
 function menu(){
