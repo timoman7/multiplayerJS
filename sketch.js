@@ -1,3 +1,4 @@
+//ERROR TAKES PLACE IN SETUP
 var currentUser;
 /*setInterval(function(){
 	if(currentUser){
