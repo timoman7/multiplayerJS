@@ -1255,6 +1255,7 @@ fp = 0;
 fps = 0;
 framerate = 0;
 frames = 0;
+/*
 bullet_sound = getSound("rpg/hit-splat");
 bullet_hit = getSound("rpg/hit-whack");
 rocket_sound = getSound("retro/thruster-short");
@@ -1310,7 +1311,6 @@ rocketBullet={
     fire_sound:rocket_sound,
     hit_sound:rocket_explode,
 };
-/*
   //Bullets
   // Gun creation
 // x, y, bullet speed, bullet damage, radius, detection range
