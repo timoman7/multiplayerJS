@@ -849,6 +849,7 @@ function Entity(x,y,radius,name,maxHP,bullet,isPlayer,mainPlayer){
     this.hasControls=false;
     this.Projectiles=[];
     this.fired=[];
+    console.log(this.bullet);
     this.fired[this.bullet.name]=false;
     this.fireDelay=[];
     this.fireDelay[this.bullet.name]=0;
