@@ -36,7 +36,7 @@ function signOut(){
 		console.log(error);
 		alert("Somehow you screwed up logging out.");
 	});
-}
+/*
 var globals, keys, mouse, buttons, platforms, f, fp, fps, framerate, frames, bullet_sound, bullet_hit, rocket_sound, rocket_explode, state, dbug, gravity, bg, player, test, testPlat, testPlat2, Tau, enemyBullet, minigunBullet, defaultBullet, rocketBullet, p1c, setBG, backToMenu, backToMenu2, backToMenu3, playGame, helpBtn, testDrop, bgR, bgG, bgB, bgrP1Btn, bgrP5Btn, bgrP10Btn, bgrM1Btn, bgrM5Btn, bgrM10Btn, bggP1Btn, bggP5Btn, bggP10Btn, bggM1Btn, bggM5Btn, bggM10Btn, bgbP1Btn, bgbP5Btn, bgbP10Btn, bgbM1Btn, bgbM5Btn, bgbM10Btn;
 //Sin angle / hyp = Y
 //Cos angle / hyp = X
@@ -957,10 +957,9 @@ function Entity(x,y,radius,name,maxHP,bullet){
             this.applyForce(createVector(0,-gravity.y*1.15));
             this.vel.y*= -0.85;
         }else if(orient === "a"){
-            this.bounce = arguments[1];
+           this.bounce = arguments[1];
           	this.collisionPointX = ((this.pos.x * this.bounce.height) + (this.bounce.pos.x * this.radius)) / (this.radius + this.bounce.height);
- 
-						this.collisionPointY = ((this.pos.y * this.bounce.height) + (this.bounce.pos.y * this.radius)) / (this.radius + this.bounce.height);
+		this.collisionPointY = ((this.pos.y * this.bounce.height) + (this.bounce.pos.y * this.radius)) / (this.radius + this.bounce.height);
           	// this.hyp=dist(this.bounce.pos.x,this.bounce.pos.y,this.pos.x,this.pos.y);
           	// this.angle = atan2(this.pos.y-this.bounce.pos.y,this.pos.x-this.bounce.pos.x);
           	// this.fireX = cos((this.angle))*this.hyp;
@@ -1317,18 +1316,7 @@ test = new Gun(200,200,enemyBullet,20,100);
 player = new Entity(random(0,width),random(0,height),20,"player",100,minigunBullet);
 testPlat = new Platform(width/2,(height/8)*7,400,80);
 testPlat2 = new Platform((width/6)*4,(height/8)*6,200,80);
-/*
-{
-for(var i = 0; i < width/10; i++){
-    for(var j = 0; j < height/10; j++){
-        var noiseRand=noise(i*10*random(-10,10),j*10*random(-10,10));
-        if(noiseRand>0.61){
-            new Entity(i*10,j*10,20,"target", 20);
-        }
-    }
-}
-}//Create Dummies
-*/
+
 
 for(var i = 0; i < 2; i++){
 new Entity(random(0,width),random(0,height),20,"target",20);
@@ -1626,3 +1614,4 @@ function draw(){
         console.error(err);
     }
 }
+*/
