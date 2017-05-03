@@ -579,7 +579,8 @@ function Gun(x,y,bullet,radius,range,maxHP,name){
     this.radius=radius;
     this.x=x;
     this.y=y;
-    this.bullet=bullet;
+	this.bulletName = bullet;
+    this.bullet=allBullets[this.bulletName];
     this.fired=[];
     this.fired[this.bullet.name]=false;
     this.fireDelay=[];
@@ -1374,8 +1375,8 @@ rocketBullet:{
   //Bullets
   // Gun creation
 // x, y, bullet speed, bullet damage, radius, detection range
-test = new Gun(200,200,enemyBullet,20,100);
-player = new Entity(random(0,width),random(0,height),20,"player",100,minigunBullet);
+test = new Gun(200,200,"enemyBullet",20,100);
+player = new Entity(random(0,width),random(0,height),20,"player",100,"minigunBullet");
 testPlat = new Platform(width/2,(height/8)*7,400,80);
 testPlat2 = new Platform((width/6)*4,(height/8)*6,200,80);
 
