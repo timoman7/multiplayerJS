@@ -1240,6 +1240,7 @@ function mouseReleased(){
 //Mouse & Key Events
 
 function setup(){
+	try{
   createCanvas(600,600);
   colorMode(RGB);
   angleMode(DEGREES);
@@ -1534,6 +1535,9 @@ p1c = {
     },
 };//P1 Controls
 player.setControls(p1c);
+	}catch(err){
+	console.log(err);
+	}
 }
 /*
 function menu(){
