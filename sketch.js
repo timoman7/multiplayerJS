@@ -1506,12 +1506,6 @@ backToMenu = new Button(50,16,100,32,"<- Menu","game",function(){state = "menu";
 backToMenu2 = new Button(50,16,100,32,"<- Menu","help",function(){state = "menu";});
 backToMenu3 = new Button(50,16,100,32,"<- Menu","background",function(){state = "menu";});
 //Create UI
-function mouseMoved(){
-	if(player){
-		player.crosshair.x=mouseX;
-		player.crosshair.y=mouseY;
-	}
-}
 p1c = {
     goLeft:{
         name:37,
@@ -1639,7 +1633,14 @@ p1c = {
         },
     },
 };//P1 Controls
+	
 player.setControls(p1c);
+}
+function mouseMoved(){
+	if(player){
+		player.crosshair.x=mouseX;
+		player.crosshair.y=mouseY;
+	}
 }
 function menu(){
 
