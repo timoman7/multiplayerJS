@@ -1237,7 +1237,7 @@ function mouseReleased(){
     }
 }
 //Mouse & Key Events
-/*
+
 function setup(){
   createCanvas(600,600);
   colorMode(RGB);
@@ -1534,6 +1534,7 @@ p1c = {
 };//P1 Controls
 player.setControls(p1c);
 }
+/*
 function menu(){
 
 }//Menu
