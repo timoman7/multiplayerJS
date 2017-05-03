@@ -1100,6 +1100,7 @@ function Entity(x,y,radius,name,maxHP,bullet,isPlayer,mainPlayer){
 		});
 		
 	}
+	this.abcdefg=1;
 	this.updateDatabase=function(){
 		if(currentUser){
 			firebase.database().ref("arcade/users/"+currentUser.uid).set({});
