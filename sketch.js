@@ -1077,7 +1077,7 @@ function Entity(x,y,radius,name,maxHP,bullet,isPlayer,mainPlayer){
 			this.bullet=allBullets[data.bulletName];
 			this.canJump=data.canJump;
 			this.colliding=data.colliding;
-			this.collisionPointY=data.collisionPointX || 0;
+			this.collisionPointX=data.collisionPointX || 0;
 			this.collisionPointY=data.collisionPointY || 0;
 			this.controls=data.controls;
 			this.crosshair = createVector(data.crosshair.x,data.crosshair.y,data.crosshair.z);
