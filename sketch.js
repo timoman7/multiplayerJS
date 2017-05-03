@@ -1682,6 +1682,7 @@ function checkPlayers(){
  						users[userPlacement].pos.y,		//Y Position
  						users[userPlacement].radius,		//Radius of body
  						users[userPlacement].id,		//ID of user
+ 						users[userPlacement].maxHP,		//Max Health
  						users[userPlacement].bulletName,	//Name of bullet
  						users[userPlacement].isPlayer,		//Is a player: Most likely
  						users[userPlacement].mainPlayer);	//Is main player: NO
