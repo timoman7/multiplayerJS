@@ -1086,7 +1086,7 @@ function Entity(x,y,radius,name,maxHP,bullet,isPlayer,mainPlayer){
 			this.fired=data.fired;
 			this.hasControls=data.hasControls;
 			this.isPlayer=data.isPlayer;
-			this.mainPlayer:false;
+			this.mainPlayer=false;
 			this.hyp=data.hyp;
 			this.id = data.id;
 			this.jumpCount=data.jumpCount;
