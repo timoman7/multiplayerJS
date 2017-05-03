@@ -1108,7 +1108,7 @@ function Entity(x,y,radius,name,maxHP,bullet,isPlayer,mainPlayer){
 		if(currentUser){
 			firebase.database().ref("arcade/users/"+currentUser.uid).set({});
 			var tempProjectiles=[];
-			for(var i = 0;; i < this.Projectiles.length; i++){
+			for(var i = 0; i < this.Projectiles.length; i++){
 				var tp = this.Projectiles[i];
 				tempProjectiles.push({
 					pos:{
