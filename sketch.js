@@ -1,6 +1,6 @@
 //ERROR TAKES PLACE IN SETUP
 var currentUser;
-/*setInterval(function(){
+setInterval(function(){
 	if(currentUser){
 		var logoutbtn = $(".Logout");
 		logoutbtn.show();
@@ -12,7 +12,7 @@ var currentUser;
 		var loginbtns = $(".Login");
 		loginbtns.show();
 	}
-},100);*/
+},100);
 
 firebase.auth().getRedirectResult().then(function(result){
 	var user = result.user;
@@ -39,7 +39,7 @@ function signOut(){
 	});
 }
 
-var globals, keys, mouse, buttons, platforms, f, fp, fps, framerate, frames, bullet_sound, bullet_hit, rocket_sound, rocket_explode, state, dbug, gravity, bg, player, test, testPlat, testPlat2, Tau, enemyBullet, minigunBullet, defaultBullet, rocketBullet, p1c, setBG, backToMenu, backToMenu2, backToMenu3, playGame, helpBtn, testDrop, bgR, bgG, bgB, bgrP1Btn, bgrP5Btn, bgrP10Btn, bgrM1Btn, bgrM5Btn, bgrM10Btn, bggP1Btn, bggP5Btn, bggP10Btn, bggM1Btn, bggM5Btn, bggM10Btn, bgbP1Btn, bgbP5Btn, bgbP10Btn, bgbM1Btn, bgbM5Btn, bgbM10Btn;
+var globals, keys, mouse, buttons, platforms, f, fp, fps, framerate, framess, bullet_sound, bullet_hit, rocket_sound, rocket_explode, state, dbug, gravity, bg, player, test, testPlat, testPlat2, Tau, enemyBullet, minigunBullet, defaultBullet, rocketBullet, p1c, setBG, backToMenu, backToMenu2, backToMenu3, playGame, helpBtn, testDrop, bgR, bgG, bgB, bgrP1Btn, bgrP5Btn, bgrP10Btn, bgrM1Btn, bgrM5Btn, bgrM10Btn, bggP1Btn, bggP5Btn, bggP10Btn, bggM1Btn, bggM5Btn, bggM10Btn, bgbP1Btn, bgbP5Btn, bgbP10Btn, bgbM1Btn, bgbM5Btn, bgbM10Btn;
 //Sin angle / hyp = Y
 //Cos angle / hyp = X
 function playSound(theSound){
@@ -54,8 +54,8 @@ function fpsScript(){
     f += 1;
     if (f === 5){
         fps = millis();
-        frames = (fps - fp)/1000;
-        framerate = round(f*(1/frames));
+        framess = (fps - fp)/1000;
+        framerate = round(f*(1/framess));
         f = 0;
     }
 } // FPS script
@@ -1253,9 +1253,8 @@ platforms = [];
 f = 0;
 fp = 0;
 fps = 0;
-/*
 framerate = 0;
-frames = 0;
+framess = 0;
 	
 bullet_sound = getSound("rpg/hit-splat");
 bullet_hit = getSound("rpg/hit-whack");
@@ -1535,9 +1534,7 @@ p1c = {
     },
 };//P1 Controls
 player.setControls(p1c);
-*/
 }
-/*
 function menu(){
 
 }//Menu
@@ -1619,4 +1616,3 @@ function draw(){
         console.error(err);
     }
 }
-*/
