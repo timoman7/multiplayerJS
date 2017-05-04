@@ -1081,9 +1081,11 @@ function Entity(x,y,radius,name,maxHP,bullet,isPlayer,mainPlayer){
         }
     };
 	this.updateFromDatabase=function(){
+		if(frameCount%20 === 0){
 		if(this.isPlayer && !this.mainPlayer){
 			firebase.database().ref("arcade/users/"+currentUser.uid).on('value',function(data){
 				var data2 = data.val();
+				console.log(data2);
 				this.HP=data2.HP;
 				this.Projectiles=data2.Projectiles;
 				this.acc=createVector(data2.acc.x,data2.acc.y,data2.acc.z);
@@ -1111,6 +1113,7 @@ function Entity(x,y,radius,name,maxHP,bullet,isPlayer,mainPlayer){
 				this.target = createVector(data2.target.x,data2.target.y,data2.target.z);
 				this.vel = createVector(data2.vel.x,data2.vel.y,data2.vel.z);
 			});
+		}
 		}
 	};
 	this.abcdefg=1;
