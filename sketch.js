@@ -1697,7 +1697,21 @@ function checkPlayers(){
 					if(users[userToAdd].isPlayer && !NotGoingToWork.mainPlayer){
 						var data2 = data.val();
 						NotGoingToWork.HP=data2.HP;
-						NotGoingToWork.Projectiles=data2.Projectiles || [];
+						var FixingProj = data2.Projectiles || [];
+						var NewProj = FixingProj;
+						if(FixingProj.length > 0){
+							for(var j = 0; j < FixingProj.length; j++){
+								NewProj.push(
+								new Projectile(
+									createVector(FixingProj[j].target.x,FixingProj[j].target.y,FixingProj[j].target.z), // Target
+									FixingProj[j].bulletName,
+									NotGoingToWork,
+									frameCount
+								)
+								);
+							}
+						}
+						NotGoingToWork.Projectiles=NewProj;
 						NotGoingToWork.acc=createVector(data2.acc.x,data2.acc.y,data2.acc.z);
 						NotGoingToWork.angle=data2.angle;
 						NotGoingToWork.bulletName = data2.bulletName;
