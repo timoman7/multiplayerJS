@@ -1257,7 +1257,9 @@ function Entity(x,y,radius,name,maxHP,bullet,isPlayer,mainPlayer){
             
         }
         for(var i = 0; i < this.Projectiles.length; i++){
-            this.Projectiles[i].draw();
+		if(this.Projectiles[i]){
+			this.Projectiles[i].draw();
+		}
         }
         fill(255);
         stroke(0);
