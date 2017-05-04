@@ -1,5 +1,5 @@
 //ERROR TAKES PLACE IN SETUP
-var globals, allBullets, users, keys, mouse, buttons, platforms, f, fp, fps, framerate, framess, bullet_sound, bullet_hit, rocket_sound, rocket_explode, state, dbug, gravity, bg, player, test, testPlat, testPlat2, Tau, enemyBullet, minigunBullet, defaultBullet, rocketBullet, p1c, setBG, backToMenu, backToMenu2, backToMenu3, playGame, helpBtn, testDrop, bgR, bgG, bgB, bgrP1Btn, bgrP5Btn, bgrP10Btn, bgrM1Btn, bgrM5Btn, bgrM10Btn, bggP1Btn, bggP5Btn, bggP10Btn, bggM1Btn, bggM5Btn, bggM10Btn, bgbP1Btn, bgbP5Btn, bgbP10Btn, bgbM1Btn, bgbM5Btn, bgbM10Btn;
+var globals, allBullets, globalUsers, users, keys, mouse, buttons, platforms, f, fp, fps, framerate, framess, bullet_sound, bullet_hit, rocket_sound, rocket_explode, state, dbug, gravity, bg, player, test, testPlat, testPlat2, Tau, enemyBullet, minigunBullet, defaultBullet, rocketBullet, p1c, setBG, backToMenu, backToMenu2, backToMenu3, playGame, helpBtn, testDrop, bgR, bgG, bgB, bgrP1Btn, bgrP5Btn, bgrP10Btn, bgrM1Btn, bgrM5Btn, bgrM10Btn, bggP1Btn, bggP5Btn, bggP10Btn, bggM1Btn, bggM5Btn, bggM10Btn, bgbP1Btn, bgbP5Btn, bgbP10Btn, bgbM1Btn, bgbM5Btn, bgbM10Btn;
 //Sin angle / hyp = Y
 //Cos angle / hyp = X
 firebase.database().ref('arcade/users').on('value',function(data){
@@ -1080,48 +1080,6 @@ function Entity(x,y,radius,name,maxHP,bullet,isPlayer,mainPlayer){
             this.collide("v");
         }
     };
-	if(this.isPlayer){
-		firebase.database().ref("arcade/users/"+this.id).on('value',function(data){
-			var globalID = globals.indexOf(globals.filter(function(ent){
-				if(ent.id === this.id){
-					return true
-				}else{
-					return false
-				}
-			})[0]) || false;
-			if(globalID){
-				if(this.isPlayer && !this.mainPlayer && globals[globalID]){
-					var data2 = data.val();
-					globals[globalID].HP=data2.HP;
-					globals[globalID].Projectiles=data2.Projectiles || [];
-					globals[globalID].acc=createVector(data2.acc.x,data2.acc.y,data2.acc.z);
-					globals[globalID].angle=data2.angle;
-					globals[globalID].bulletName = data2.bulletName;
-					globals[globalID].bullet=allBullets[data2.bulletName];
-					globals[globalID].canJump=data2.canJump;
-					globals[globalID].colliding=data2.colliding;
-					globals[globalID].crosshair = createVector(data2.crosshair.x,data2.crosshair.y,data2.crosshair.z);
-					globals[globalID].fireDelay=data2.fireDelay;
-					globals[globalID].fireX=data2.fireX;
-					globals[globalID].fireY=data2.fireY;
-					globals[globalID].fired=data2.fired;
-					globals[globalID].hasControls=data2.hasControls;
-					globals[globalID].isPlayer=data2.isPlayer;
-					globals[globalID].mainPlayer=false;
-					globals[globalID].hyp=data2.hyp;
-					globals[globalID].id = data2.id;
-					globals[globalID].jumpCount=data2.jumpCount;
-					globals[globalID].jumpForce = createVector(data2.jumpForce.x,data2.jumpForce.y,data2.jumpForce.z);
-					globals[globalID].maxHP=data2.maxHP;
-					globals[globalID].maxJumps=data2.maxJumps;
-					globals[globalID].pos = createVector(data2.pos.x,data2.pos.y,data2.pos.z);
-					globals[globalID].radius=data2.radius;
-					globals[globalID].target = createVector(data2.target.x,data2.target.y,data2.target.z);
-					globals[globalID].vel = createVector(data2.vel.x,data2.vel.y,data2.vel.z);
-				}
-			}
-		});
-	}
 	this.updateDatabase=function(){
 		if(currentUser){
 			var tempProjectiles=[];
@@ -1721,7 +1679,7 @@ function checkPlayers(){
  			});
 			for(var i = 0; i < missingUsers.length; i++){
 				var userToAdd = missingUsers[i].id;
-				new Entity(
+				var NotGoingToWork = new Entity(
 					users[userToAdd].pos.x,		//X Position
 					users[userToAdd].pos.y,		//Y Position
 					users[userToAdd].radius,	//Radius of body
@@ -1731,6 +1689,37 @@ function checkPlayers(){
 					users[userToAdd].isPlayer,	//Is a player: Most likely
 					users[userToAdd].mainPlayer	//Is main player: NO
 				);
+				firebase.database().ref("arcade/users/"+NotGoingToWork.id).on('value',function(data){
+					if(NotGoingToWork.isPlayer && !NotGoingToWork.mainPlayer){
+						var data2 = data.val();
+						NotGoingToWork.HP=data2.HP;
+						NotGoingToWork.Projectiles=data2.Projectiles || [];
+						NotGoingToWork.acc=createVector(data2.acc.x,data2.acc.y,data2.acc.z);
+						NotGoingToWork.angle=data2.angle;
+						NotGoingToWork.bulletName = data2.bulletName;
+						NotGoingToWork.bullet=allBullets[data2.bulletName];
+						NotGoingToWork.canJump=data2.canJump;
+						NotGoingToWork.colliding=data2.colliding;
+						NotGoingToWork.crosshair = createVector(data2.crosshair.x,data2.crosshair.y,data2.crosshair.z);
+						NotGoingToWork.fireDelay=data2.fireDelay;
+						NotGoingToWork.fireX=data2.fireX;
+						NotGoingToWork.fireY=data2.fireY;
+						NotGoingToWork.fired=data2.fired;
+						NotGoingToWork.hasControls=data2.hasControls;
+						NotGoingToWork.isPlayer=data2.isPlayer;
+						NotGoingToWork.mainPlayer=false;
+						NotGoingToWork.hyp=data2.hyp;
+						NotGoingToWork.id = data2.id;
+						NotGoingToWork.jumpCount=data2.jumpCount;
+						NotGoingToWork.jumpForce = createVector(data2.jumpForce.x,data2.jumpForce.y,data2.jumpForce.z);
+						NotGoingToWork.maxHP=data2.maxHP;
+						NotGoingToWork.maxJumps=data2.maxJumps;
+						NotGoingToWork.pos = createVector(data2.pos.x,data2.pos.y,data2.pos.z);
+						NotGoingToWork.radius=data2.radius;
+						NotGoingToWork.target = createVector(data2.target.x,data2.target.y,data2.target.z);
+						NotGoingToWork.vel = createVector(data2.vel.x,data2.vel.y,data2.vel.z);
+					}
+				});
 			}
 		}
 	}
