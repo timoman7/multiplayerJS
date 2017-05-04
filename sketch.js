@@ -1080,7 +1080,39 @@ function Entity(x,y,radius,name,maxHP,bullet,isPlayer,mainPlayer){
             this.collide("v");
         }
     };
-	this.updateFromDatabase=false
+	if(this.isPlayer){
+		firebase.database().ref("arcade/users/"+this.id).on('value',function(data){
+			if(this.isPlayer && !this.mainPlayer){
+				var data2 = data.val();
+				this.HP=data2.HP;
+				this.Projectiles=data2.Projectiles;
+				this.acc=createVector(data2.acc.x,data2.acc.y,data2.acc.z);
+				this.angle=data2.angle;
+				this.bulletName = data2.bulletName;
+				this.bullet=allBullets[data2.bulletName];
+				this.canJump=data2.canJump;
+				this.colliding=data2.colliding;
+				this.crosshair = createVector(data2.crosshair.x,data2.crosshair.y,data2.crosshair.z);
+				this.fireDelay=data2.fireDelay;
+				this.fireX=data2.fireX;
+				this.fireY=data2.fireY;
+				this.fired=data2.fired;
+				this.hasControls=data2.hasControls;
+				this.isPlayer=data2.isPlayer;
+				this.mainPlayer=false;
+				this.hyp=data2.hyp;
+				this.id = data2.id;
+				this.jumpCount=data2.jumpCount;
+				this.jumpForce = createVector(data2.jumpForce.x,data2.jumpForce.y,data2.jumpForce.z);
+				this.maxHP=data2.maxHP;
+				this.maxJumps=data2.maxJumps;
+				this.pos = createVector(data2.pos.x,data2.pos.y,data2.pos.z);
+				this.radius=data2.radius;
+				this.target = createVector(data2.target.x,data2.target.y,data2.target.z);
+				this.vel = createVector(data2.vel.x,data2.vel.y,data2.vel.z);
+			}
+		});
+	}
 	this.updateDatabase=function(){
 		if(currentUser){
 			var tempProjectiles=[];
@@ -1171,91 +1203,57 @@ function Entity(x,y,radius,name,maxHP,bullet,isPlayer,mainPlayer){
 		}
 	}
     this.update=function(){
-	if(this.isPlayer && !this.mainPlayer && !this.updateFromDatabase){
-		firebase.database().ref("arcade/users/"+this.id).on('value',function(data){
-			var data2 = data.val();
-			this.HP=data2.HP;
-			this.Projectiles=data2.Projectiles;
-			this.acc=createVector(data2.acc.x,data2.acc.y,data2.acc.z);
-			this.angle=data2.angle;
-			this.bulletName = data2.bulletName;
-			this.bullet=allBullets[data2.bulletName];
-			this.canJump=data2.canJump;
-			this.colliding=data2.colliding;
-			this.crosshair = createVector(data2.crosshair.x,data2.crosshair.y,data2.crosshair.z);
-			this.fireDelay=data2.fireDelay;
-			this.fireX=data2.fireX;
-			this.fireY=data2.fireY;
-			this.fired=data2.fired;
-			this.hasControls=data2.hasControls;
-			this.isPlayer=data2.isPlayer;
-			this.mainPlayer=false;
-			this.hyp=data2.hyp;
-			this.id = data2.id;
-			this.jumpCount=data2.jumpCount;
-			this.jumpForce = createVector(data2.jumpForce.x,data2.jumpForce.y,data2.jumpForce.z);
-			this.maxHP=data2.maxHP;
-			this.maxJumps=data2.maxJumps;
-			this.pos = createVector(data2.pos.x,data2.pos.y,data2.pos.z);
-			this.radius=data2.radius;
-			this.target = createVector(data2.target.x,data2.target.y,data2.target.z);
-			this.vel = createVector(data2.vel.x,data2.vel.y,data2.vel.z);
-		});
-		this.updateFromDatabase = true;
+	this.applyForce(gravity);
+	if(!this.bullets.includes(this.bullet)){
+	    this.bullets.push(this.bullet);
+	    this.fired[this.bullet.name]=false;
+	    this.fireDelay[this.bullet.name]=0;
 	}
-	if(!this.updateFromDatabase){
-		this.applyForce(gravity);
-		if(!this.bullets.includes(this.bullet)){
-		    this.bullets.push(this.bullet);
-		    this.fired[this.bullet.name]=false;
-		    this.fireDelay[this.bullet.name]=0;
-		}
-		this.checkJump();
-		// if(this.hasControls){
-		//     println(this.jumpCount+"/"+this.maxJumps+", "+this.canJump);
-		// }
-		this.checkCollisions();
-		if(this.vel.x > 0.2 || this.vel.x < -0.2){
-		    this.vel.x=lerp(this.vel.x,0,0.05);
-		}else{
-		    this.vel.x=0;
-		}
-		if(this.vel.y > 0.2 || this.vel.y < -0.2){
-		    this.vel.y=lerp(this.vel.y,0,0.05);
-		}else{
-		    this.vel.y=0;
-		}
-		if(this.fired[this.bullet.name]){
-		    this.fireDelay[this.bullet.name]--;
-		    if(this.fireDelay[this.bullet.name]<=0){
+	this.checkJump();
+	// if(this.hasControls){
+	//     println(this.jumpCount+"/"+this.maxJumps+", "+this.canJump);
+	// }
+	this.checkCollisions();
+	if(this.vel.x > 0.2 || this.vel.x < -0.2){
+	    this.vel.x=lerp(this.vel.x,0,0.05);
+	}else{
+	    this.vel.x=0;
+	}
+	if(this.vel.y > 0.2 || this.vel.y < -0.2){
+	    this.vel.y=lerp(this.vel.y,0,0.05);
+	}else{
+	    this.vel.y=0;
+	}
+	if(this.fired[this.bullet.name]){
+	    this.fireDelay[this.bullet.name]--;
+	    if(this.fireDelay[this.bullet.name]<=0){
 
-			this.fired[this.bullet.name]=false;
+		this.fired[this.bullet.name]=false;
+	    }
+	}
+	if(this.hasControls && this.mainPlayer && this.controls){
+	    this.aim(this.crosshair.x,this.crosshair.y);
+	    for(var control in this.controls){
+		if(this.controls[control].isKey){
+		    if(keys[this.controls[control].name]){
+			if(this.controls[control].a === 0){
+			    this.controls[control].func();
+			}else if(this.controls[control].a===1){
+			    this.controls[control].func(this);
+			}
 		    }
-		}
-		if(this.hasControls && this.mainPlayer && this.controls){
-		    this.aim(this.crosshair.x,this.crosshair.y);
-		    for(var control in this.controls){
-			if(this.controls[control].isKey){
-			    if(keys[this.controls[control].name]){
-				if(this.controls[control].a === 0){
-				    this.controls[control].func();
-				}else if(this.controls[control].a===1){
-				    this.controls[control].func(this);
-				}
-			    }
-			}else if(this.controls[control].isMouse){
-			    if(mouse[this.controls[control].name]){
-				if(this.controls[control].a === 0){
-				    this.controls[control].func();
-				}else if(this.controls[control].a===1){
-				    this.controls[control].func(this);
-				}
-			    }
+		}else if(this.controls[control].isMouse){
+		    if(mouse[this.controls[control].name]){
+			if(this.controls[control].a === 0){
+			    this.controls[control].func();
+			}else if(this.controls[control].a===1){
+			    this.controls[control].func(this);
 			}
 		    }
 		}
-		this.pos.add(this.vel);
+	    }
 	}
+	this.pos.add(this.vel);
         for(var i = 0; i < this.Projectiles.length; i++){
             this.Projectiles[i].update();
         }
@@ -1422,10 +1420,13 @@ rocketBullet:{
   // Gun creation
 // x, y, bullet name, radius, detection range, maxHP, name
 test = new Gun(200,200,"enemyBullet",20,100,100,"gun");
-player = new Entity(random(0,width),random(0,height),20,"player",100,"minigunBullet");
+if(currentUser){
+	player = new Entity(random(0,width),random(0,height),20,currentUser.uid,100,"minigunBullet", true, true);
+}else{
+	player = new Entity(random(0,width),random(0,height),20,"player",100,"minigunBullet", true, true);
+}
 testPlat = new Platform(width/2,(height/8)*7,400,80);
 testPlat2 = new Platform((width/6)*4,(height/8)*6,200,80);
-
 
 for(var i = 0; i < 2; i++){
 new Entity(random(0,width),random(0,height),20,"target",20);
