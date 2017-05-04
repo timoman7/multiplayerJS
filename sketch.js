@@ -1083,7 +1083,7 @@ function Entity(x,y,radius,name,maxHP,bullet,isPlayer,mainPlayer){
 	this.updateFromDatabase=function(){
 		if(frameCount%20 === 0){
 		if(this.isPlayer && !this.mainPlayer){
-			firebase.database().ref("arcade/users/"+currentUser.uid).on('value',function(data){
+			firebase.database().ref("arcade/users/"+this.id).on('value',function(data){
 				var data2 = data.val();
 				console.log(data2);
 				this.HP=data2.HP;
