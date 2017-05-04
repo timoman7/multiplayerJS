@@ -1713,7 +1713,7 @@ function draw(){
         if(state === "menu"){
             
         }else if(state === "game"){
-		checkPlayers();
+		//checkPlayers();
             game();
         }else if(state === "help"){
             help();
