@@ -1686,7 +1686,24 @@ function checkPlayers(){
 	if(currentUser){
 		if(users){
 			//Go through global and check if any ids in users are not present
-			//If an id is not present, create a new entity 
+			//If an id is not present, create a new entity
+// 			var tempUsers = Object.values(users).filter(function(ent){
+// 				for(var i = 0; i < globals.length; i++){
+// 					if(
+// 				}
+// 			});
+			var tempGlobals = globals.filter(function(ent){
+				var toReturn = false;
+				for(var i in users){
+					//if ent.id === i, it means globals contains that user
+					//if not, globals does not contain the user, and needs to add it
+					if(ent.id === i){
+						toReturn = true;
+					}
+				}
+				return toReturn
+			});
+			console.log(tempGlobals);
 // 			for(var j = 0; j < globals.length; j++){
 // 				var newUser = false;
 // 				var userPlacement = 0;
@@ -1727,8 +1744,10 @@ function draw(){
         if(state === "menu"){
             
         }else if(state === "game"){
-		checkPlayers();
-            game();
+		if(frameCount%20 === 0){
+			checkPlayers();
+		}
+		game();
         }else if(state === "help"){
             help();
         }else if(state === "background"){
