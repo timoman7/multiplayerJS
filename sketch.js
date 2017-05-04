@@ -854,7 +854,8 @@ function Entity(x,y,radius,name,maxHP,bullet,isPlayer,mainPlayer){
     this.fireDelay=[];
     this.fireDelay[this.bullet.name]=0;
     this.crosshair=createVector(mouseX,mouseY);
-	this.mainPlayer = false;
+	this.isPlayer = isPlayer || false;
+	this.mainPlayer = mainPlayer || false;
     this.colliding={
     left:false,
     top:false,
@@ -1080,8 +1081,6 @@ function Entity(x,y,radius,name,maxHP,bullet,isPlayer,mainPlayer){
 			this.bullet=allBullets[data2.bulletName];
 			this.canJump=data2.canJump;
 			this.colliding=data2.colliding;
-			this.collisionPointX=data2.collisionPointX || 0;
-			this.collisionPointY=data2.collisionPointY || 0;
 			this.crosshair = createVector(data2.crosshair.x,data2.crosshair.y,data2.crosshair.z);
 			this.fireDelay=data2.fireDelay;
 			this.fireX=data2.fireX;
@@ -1106,7 +1105,6 @@ function Entity(x,y,radius,name,maxHP,bullet,isPlayer,mainPlayer){
 	this.abcdefg=1;
 	this.updateDatabase=function(){
 		if(currentUser){
-			firebase.database().ref("arcade/users/"+currentUser.uid).set({});
 			var tempProjectiles=[];
 			for(var i = 0; i < this.Projectiles.length; i++){
 				var tp = this.Projectiles[i];
@@ -1153,8 +1151,6 @@ function Entity(x,y,radius,name,maxHP,bullet,isPlayer,mainPlayer){
 				bulletName:this.bulletName,
 				canJump:this.canJump,
 				colliding:this.colliding,
-				collisionPointX:this.collisionPointX || 0,
-				collisionPointY:this.collisionPointY || 0,
 				crosshair:{
 					x:this.crosshair.x,
 					y:this.crosshair.y,
@@ -1225,10 +1221,7 @@ function Entity(x,y,radius,name,maxHP,bullet,isPlayer,mainPlayer){
                 this.fired[this.bullet.name]=false;
             }
         }
-	    if(this.isPlayer && this.mainPlayer){
-	    	this.updateDatabase();
-	    }
-        if(this.hasControls && this.mainPlayer){
+        if(this.hasControls && this.mainPlayer && this.controls){
             this.aim(this.crosshair.x,this.crosshair.y);
             for(var control in this.controls){
                 if(this.controls[control].isKey){
@@ -1254,6 +1247,9 @@ function Entity(x,y,radius,name,maxHP,bullet,isPlayer,mainPlayer){
         for(var i = 0; i < this.Projectiles.length; i++){
             this.Projectiles[i].update();
         }
+	    if(this.isPlayer && this.mainPlayer){
+	    	this.updateDatabase();
+	    }
         if(this.HP<=0){
             for(var i = 0; i < globals.length; i++){
                 if(globals[i].id === this.id){
