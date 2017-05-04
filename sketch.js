@@ -1080,38 +1080,39 @@ function Entity(x,y,radius,name,maxHP,bullet,isPlayer,mainPlayer){
             this.collide("v");
         }
     };
-	if(this.isPlayer && !this.mainPlayer){
-		firebase.database().ref("arcade/users/"+currentUser.uid).on('value',function(data){
-			var data2 = data.val();
-			this.HP=data2.HP;
-			this.Projectiles=data2.Projectiles;
-			this.acc=createVector(data2.acc.x,data2.acc.y,data2.acc.z);
-			this.angle=data2.angle;
-			this.bulletName = data2.bulletName;
-			this.bullet=allBullets[data2.bulletName];
-			this.canJump=data2.canJump;
-			this.colliding=data2.colliding;
-			this.crosshair = createVector(data2.crosshair.x,data2.crosshair.y,data2.crosshair.z);
-			this.fireDelay=data2.fireDelay;
-			this.fireX=data2.fireX;
-			this.fireY=data2.fireY;
-			this.fired=data2.fired;
-			this.hasControls=data2.hasControls;
-			this.isPlayer=data2.isPlayer;
-			this.mainPlayer=false;
-			this.hyp=data2.hyp;
-			this.id = data2.id;
-			this.jumpCount=data2.jumpCount;
-			this.jumpForce = createVector(data2.jumpForce.x,data2.jumpForce.y,data2.jumpForce.z);
-			this.maxHP=data2.maxHP;
-			this.maxJumps=data2.maxJumps;
-			this.pos = createVector(data2.pos.x,data2.pos.y,data2.pos.z);
-			this.radius=data2.radius;
-			this.target = createVector(data2.target.x,data2.target.y,data2.target.z);
-			this.vel = createVector(data2.vel.x,data2.vel.y,data2.vel.z);
-		});
-		
-	}
+	this.updateFromDatabase=function(){
+		if(this.isPlayer && !this.mainPlayer){
+			firebase.database().ref("arcade/users/"+currentUser.uid).on('value',function(data){
+				var data2 = data.val();
+				this.HP=data2.HP;
+				this.Projectiles=data2.Projectiles;
+				this.acc=createVector(data2.acc.x,data2.acc.y,data2.acc.z);
+				this.angle=data2.angle;
+				this.bulletName = data2.bulletName;
+				this.bullet=allBullets[data2.bulletName];
+				this.canJump=data2.canJump;
+				this.colliding=data2.colliding;
+				this.crosshair = createVector(data2.crosshair.x,data2.crosshair.y,data2.crosshair.z);
+				this.fireDelay=data2.fireDelay;
+				this.fireX=data2.fireX;
+				this.fireY=data2.fireY;
+				this.fired=data2.fired;
+				this.hasControls=data2.hasControls;
+				this.isPlayer=data2.isPlayer;
+				this.mainPlayer=false;
+				this.hyp=data2.hyp;
+				this.id = data2.id;
+				this.jumpCount=data2.jumpCount;
+				this.jumpForce = createVector(data2.jumpForce.x,data2.jumpForce.y,data2.jumpForce.z);
+				this.maxHP=data2.maxHP;
+				this.maxJumps=data2.maxJumps;
+				this.pos = createVector(data2.pos.x,data2.pos.y,data2.pos.z);
+				this.radius=data2.radius;
+				this.target = createVector(data2.target.x,data2.target.y,data2.target.z);
+				this.vel = createVector(data2.vel.x,data2.vel.y,data2.vel.z);
+			});
+		}
+	};
 	this.abcdefg=1;
 	this.updateDatabase=function(){
 		if(currentUser){
@@ -1260,6 +1261,7 @@ function Entity(x,y,radius,name,maxHP,bullet,isPlayer,mainPlayer){
 	    if(this.isPlayer && this.mainPlayer){
 	    	this.updateDatabase();
 	    }
+	    this.updateFromDatabase();
         if(this.HP<=0){
             for(var i = 0; i < globals.length; i++){
                 if(globals[i].id === this.id){
