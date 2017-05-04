@@ -1222,7 +1222,9 @@ function Entity(x,y,radius,name,maxHP,bullet,isPlayer,mainPlayer){
 	}
 	this.pos.add(this.vel);
         for(var i = 0; i < this.Projectiles.length; i++){
-            this.Projectiles[i].update();
+		if(this.Projectiles[i]){
+            		this.Projectiles[i].update();
+		}
         }
 	if(this.isPlayer && this.mainPlayer){
 		this.updateDatabase();
@@ -1689,8 +1691,8 @@ function checkPlayers(){
 					users[userToAdd].isPlayer,	//Is a player: Most likely
 					users[userToAdd].mainPlayer	//Is main player: NO
 				);
-				firebase.database().ref("arcade/users/"+NotGoingToWork.id).on('value',function(data){
-					if(NotGoingToWork.isPlayer && !NotGoingToWork.mainPlayer){
+				firebase.database().ref("arcade/users/"+userToAdd).on('value',function(data){
+					if(users[userToAdd].isPlayer && !NotGoingToWork.mainPlayer){
 						var data2 = data.val();
 						NotGoingToWork.HP=data2.HP;
 						NotGoingToWork.Projectiles=data2.Projectiles || [];
