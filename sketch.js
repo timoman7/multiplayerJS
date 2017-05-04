@@ -1687,11 +1687,6 @@ function checkPlayers(){
 		if(users){
 			//Go through global and check if any ids in users are not present
 			//If an id is not present, create a new entity
-// 			var tempUsers = Object.values(users).filter(function(ent){
-// 				for(var i = 0; i < globals.length; i++){
-// 					if(
-// 				}
-// 			});
 			var tempGlobals = globals.filter(function(ent){
 				var toReturn = false;
 				for(var i in users){
@@ -1703,30 +1698,28 @@ function checkPlayers(){
 				}
 				return toReturn
 			});
-			console.log(tempGlobals);
-// 			for(var j = 0; j < globals.length; j++){
-// 				var newUser = false;
-// 				var userPlacement = 0;
-// 				for(var i in users){
-// 					if(globals[j].id !== users[i].id && !newUser){
-// 						newUser = true;
-// 						userPlacement = i;
-// 					}
-// 				}
-// 				if(newUser){
-// 					console.log(users[userPlacement]);
-// //					console.log(users[userPlacement]);
-// //  					new Entity(
-// //  						users[userPlacement].pos.x,		//X Position
-// //  						users[userPlacement].pos.y,		//Y Position
-// //  						users[userPlacement].radius,		//Radius of body
-// //  						users[userPlacement].id,		//ID of user
-// //  						users[userPlacement].maxHP,		//Max Health
-// //  						users[userPlacement].bulletName,	//Name of bullet
-// //  						users[userPlacement].isPlayer,		//Is a player: Most likely
-// //  						users[userPlacement].mainPlayer);	//Is main player: NO
-// 				}
-// 			}
+ 			var missingUsers = Object.values(users).filter(function(ent){
+				var toReturn = true;
+				for(var i = 0; i < tempGlobals.length; i++){
+					if(tempGlobals[i].id === ent.id){
+						toReturn = false;
+					}
+				}
+				return toReturn;
+ 			});
+			for(var i = 0; i < missingUsers.length; i++){
+				var userToAdd = missingUsers[i].id;
+				new Entity(
+					users[userToAdd].pos.x,		//X Position
+					users[userToAdd].pos.y,		//Y Position
+					users[userToAdd].radius,	//Radius of body
+					users[userToAdd].id,		//ID of user
+					users[userToAdd].maxHP,		//Max Health
+					users[userToAdd].bulletName,	//Name of bullet
+					users[userToAdd].isPlayer,	//Is a player: Most likely
+					users[userToAdd].mainPlayer	//Is main player: NO
+				);
+			}
 		}
 	}
 }
