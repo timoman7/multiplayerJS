@@ -1408,8 +1408,8 @@ rocketBullet:{
 }};
   //Bullets
   // Gun creation
-// x, y, bullet speed, bullet damage, radius, detection range
-test = new Gun(200,200,"enemyBullet",20,100);
+// x, y, bullet name, radius, detection range, maxHP, name
+test = new Gun(200,200,"enemyBullet",20,100,100,"gun");
 player = new Entity(random(0,width),random(0,height),20,"player",100,"minigunBullet");
 testPlat = new Platform(width/2,(height/8)*7,400,80);
 testPlat2 = new Platform((width/6)*4,(height/8)*6,200,80);
