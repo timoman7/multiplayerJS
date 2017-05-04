@@ -1684,16 +1684,17 @@ function checkPlayers(){
 					}
 				}
 				if(newUser){
+					console.log(users[userPlacement]);
 //					console.log(users[userPlacement]);
- 					new Entity(
- 						users[userPlacement].pos.x,		//X Position
- 						users[userPlacement].pos.y,		//Y Position
- 						users[userPlacement].radius,		//Radius of body
- 						users[userPlacement].id,		//ID of user
- 						users[userPlacement].maxHP,		//Max Health
- 						users[userPlacement].bulletName,	//Name of bullet
- 						users[userPlacement].isPlayer,		//Is a player: Most likely
- 						users[userPlacement].mainPlayer);	//Is main player: NO
+//  					new Entity(
+//  						users[userPlacement].pos.x,		//X Position
+//  						users[userPlacement].pos.y,		//Y Position
+//  						users[userPlacement].radius,		//Radius of body
+//  						users[userPlacement].id,		//ID of user
+//  						users[userPlacement].maxHP,		//Max Health
+//  						users[userPlacement].bulletName,	//Name of bullet
+//  						users[userPlacement].isPlayer,		//Is a player: Most likely
+//  						users[userPlacement].mainPlayer);	//Is main player: NO
 				}
 			}
 		}
@@ -1713,7 +1714,7 @@ function draw(){
         if(state === "menu"){
             
         }else if(state === "game"){
-		//checkPlayers();
+		checkPlayers();
             game();
         }else if(state === "help"){
             help();
