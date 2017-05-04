@@ -2,7 +2,17 @@
 var globals, allBullets, users, keys, mouse, buttons, platforms, f, fp, fps, framerate, framess, bullet_sound, bullet_hit, rocket_sound, rocket_explode, state, dbug, gravity, bg, player, test, testPlat, testPlat2, Tau, enemyBullet, minigunBullet, defaultBullet, rocketBullet, p1c, setBG, backToMenu, backToMenu2, backToMenu3, playGame, helpBtn, testDrop, bgR, bgG, bgB, bgrP1Btn, bgrP5Btn, bgrP10Btn, bgrM1Btn, bgrM5Btn, bgrM10Btn, bggP1Btn, bggP5Btn, bggP10Btn, bggM1Btn, bggM5Btn, bggM10Btn, bgbP1Btn, bgbP5Btn, bgbP10Btn, bgbM1Btn, bgbM5Btn, bgbM10Btn;
 //Sin angle / hyp = Y
 //Cos angle / hyp = X
-firebase.database().ref('arcade/users').on('value',function(data){users = data.val();});
+firebase.database().ref('arcade/users').on('value',function(data){
+	users = {};
+	if(currentUser){
+		var newusers = Object.values(data.val()).filter(function(ent){return ent.id !== currentUser.uid});
+		for(var tempUser = 0; tempUser < newusers.length; tempUser++){
+			users[newusers[tempUser].id] = newusers[tempUser];
+		}
+	}else{
+		users = data.val();
+	}
+});
 function playSound(theSound){
   if(theSound.isLoaded()){
   	theSound.play();
@@ -1671,32 +1681,35 @@ function bckground(){
     text("Red: "+bgR+"\nGreen: "+bgG+"\nBlue: "+bgB,(width/2)-80,(height/5)+240);
     textAlign(LEFT,BASELINE);
 }//Background
+//globals.filter(function(ent){return ent.id.includes("target")})
 function checkPlayers(){
 	if(currentUser){
 		if(users){
-			for(var j = 0; j < globals.length; j++){
-				var newUser = false;
-				var userPlacement = 0;
-				for(var i in users){
-					if(users[i].id !== currentUser.uid && globals[j].id !== users[i].id && !newUser){
-						newUser = true;
-						userPlacement = i;
-					}
-				}
-				if(newUser){
-					console.log(users[userPlacement]);
-//					console.log(users[userPlacement]);
-//  					new Entity(
-//  						users[userPlacement].pos.x,		//X Position
-//  						users[userPlacement].pos.y,		//Y Position
-//  						users[userPlacement].radius,		//Radius of body
-//  						users[userPlacement].id,		//ID of user
-//  						users[userPlacement].maxHP,		//Max Health
-//  						users[userPlacement].bulletName,	//Name of bullet
-//  						users[userPlacement].isPlayer,		//Is a player: Most likely
-//  						users[userPlacement].mainPlayer);	//Is main player: NO
-				}
-			}
+			//Go through global and check if any ids in users are not present
+			//If an id is not present, create a new entity 
+// 			for(var j = 0; j < globals.length; j++){
+// 				var newUser = false;
+// 				var userPlacement = 0;
+// 				for(var i in users){
+// 					if(globals[j].id !== users[i].id && !newUser){
+// 						newUser = true;
+// 						userPlacement = i;
+// 					}
+// 				}
+// 				if(newUser){
+// 					console.log(users[userPlacement]);
+// //					console.log(users[userPlacement]);
+// //  					new Entity(
+// //  						users[userPlacement].pos.x,		//X Position
+// //  						users[userPlacement].pos.y,		//Y Position
+// //  						users[userPlacement].radius,		//Radius of body
+// //  						users[userPlacement].id,		//ID of user
+// //  						users[userPlacement].maxHP,		//Max Health
+// //  						users[userPlacement].bulletName,	//Name of bullet
+// //  						users[userPlacement].isPlayer,		//Is a player: Most likely
+// //  						users[userPlacement].mainPlayer);	//Is main player: NO
+// 				}
+// 			}
 		}
 	}
 }
