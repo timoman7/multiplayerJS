@@ -19,6 +19,9 @@ firebase.auth().getRedirectResult().then(function(result){
 	if(user === null){
 	}else{
 		currentUser = firebase.auth().currentUser;
+		firebase.database().ref('arcade/users/'+currentUser.uid).onDisconnect().update({
+			online: false
+		});
 	}
 },function(error) {
 	var email = error.email;
