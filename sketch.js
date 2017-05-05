@@ -1341,6 +1341,7 @@ Tau=Math.Tau;
 globals = [];
 keys=[];
 mouse=[];
+	mouse.left = false;
 buttons = [];
 platforms = [];
 f = 0;
