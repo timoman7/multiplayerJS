@@ -5,7 +5,12 @@ var globals, allBullets, globalUsers, users, keys, mouse, buttons, platforms, f,
 firebase.database().ref('arcade/users').on('value',function(data){
 	users = {};
 	if(currentUser){
-		var newusers = Object.values(data.val()).filter(function(ent){return ent.id !== currentUser.uid});
+		firebase.database().ref('arcade/users/'+currentUser.uid).onDisconnect().update({
+			online: false
+		});
+		var newusers = Object.values(data.val()).filter(function(ent){
+			return ( (ent.id !== currentUser.uid) && (ent.online) )
+		});
 		for(var tempUser = 0; tempUser < newusers.length; tempUser++){
 			users[newusers[tempUser].id] = newusers[tempUser];
 		}
@@ -866,6 +871,11 @@ function Entity(x,y,radius,name,maxHP,bullet,isPlayer,mainPlayer){
     this.crosshair=createVector(mouseX,mouseY);
 	this.isPlayer = isPlayer || false;
 	this.mainPlayer = mainPlayer || false;
+	if(this.isPlayer && this.mainPlayer && currentUser){
+		this.online = true;
+	}else{
+		this.online = false;
+	}
     this.colliding={
     left:false,
     top:false,
@@ -1153,6 +1163,7 @@ function Entity(x,y,radius,name,maxHP,bullet,isPlayer,mainPlayer){
 				},
 				maxHP:this.maxHP,
 				maxJumps:this.maxJumps,
+				online: this.online,
 				pos:{
 					x:this.pos.x,
 					y:this.pos.y,
