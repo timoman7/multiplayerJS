@@ -1165,7 +1165,6 @@ function Entity(x,y,radius,name,maxHP,bullet,isPlayer,mainPlayer){
 				},
 				maxHP:this.maxHP,
 				maxJumps:this.maxJumps,
-				online: this.online,
 				pos:{
 					x:this.pos.x,
 					y:this.pos.y,
