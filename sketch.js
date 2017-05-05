@@ -1706,7 +1706,7 @@ function checkPlayers(){
 						NotGoingToWork.HP=data2.HP;
 						var FixingProj = data2.Projectiles || [];
 						var NewProj = FixingProj;
-						if(FixingProj.length > 0){
+						if(FixingProj.length > 0 && FixingProj.length < data2.Projectiles.length){
 							for(var j = 0; j < FixingProj.length; j++){
 								NotGoingToWork.Projectiles.push(new Projectile(
 									createVector(FixingProj[j].target.x,FixingProj[j].target.y,FixingProj[j].target.z), // Target
