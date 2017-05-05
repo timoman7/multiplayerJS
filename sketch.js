@@ -1202,6 +1202,7 @@ function Entity(x,y,radius,name,maxHP,bullet,isPlayer,mainPlayer){
 	    }
 	}
 	if(this.hasControls && this.mainPlayer && this.controls){
+		this.leftClick = mouse.left;
 	    this.aim(this.crosshair.x,this.crosshair.y);
 	    for(var control in this.controls){
 		if(this.controls[control].isKey){
@@ -1224,7 +1225,6 @@ function Entity(x,y,radius,name,maxHP,bullet,isPlayer,mainPlayer){
 	    }
 		if(this.leftClick){
 			this.fire();
-			this.leftClick=false;
 		}
 	}
 	this.pos.add(this.vel);
