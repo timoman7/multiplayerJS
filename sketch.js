@@ -1708,7 +1708,7 @@ function checkPlayers(){
 						var NewProj = FixingProj;
 						if(FixingProj.length > 0){
 							for(var j = 0; j < FixingProj.length; j++){
-								NotGoingToWork.Projectiles.[j]=new Projectile(
+								NotGoingToWork.Projectiles[j]=new Projectile(
 									createVector(FixingProj[j].target.x,FixingProj[j].target.y,FixingProj[j].target.z), // Target
 									FixingProj[j].bulletName,
 									NotGoingToWork,
