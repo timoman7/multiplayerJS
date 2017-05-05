@@ -1731,7 +1731,7 @@ function checkPlayers(){
 						NotGoingToWork.radius=data2.radius;
 						NotGoingToWork.target = createVector(data2.target.x,data2.target.y,data2.target.z);
 						NotGoingToWork.vel = createVector(data2.vel.x,data2.vel.y,data2.vel.z);
-						if(NotGoingToWork.fired[NotGoingToWork.bullet.name]){
+						if(!NotGoingToWork.fired[NotGoingToWork.bullet.name]){
 							NotGoingToWork.fire();
 						}
 					}
