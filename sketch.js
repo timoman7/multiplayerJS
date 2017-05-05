@@ -1130,6 +1130,7 @@ function Entity(x,y,radius,name,maxHP,bullet,isPlayer,mainPlayer){
 			}
 			firebase.database().ref("arcade/users/"+currentUser.uid).set({
 				HP:this.HP,
+				online:true,
 				Projectiles:tempProjectiles,
 				acc:{
 					x:this.acc.x,
@@ -1153,7 +1154,6 @@ function Entity(x,y,radius,name,maxHP,bullet,isPlayer,mainPlayer){
 				hasControls:this.hasControls,
 				isPlayer:this.isPlayer,
 				leftClick:this.leftClick,
-				online:true,
 				mainPlayer:false,
 				hyp:this.hyp,
 				id:currentUser.uid,
