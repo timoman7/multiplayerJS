@@ -1133,6 +1133,7 @@ function Entity(x,y,radius,name,maxHP,bullet,isPlayer,mainPlayer){
 					y:this.crosshair.y,
 					z:this.crosshair.z,
 				},
+				fired:this.fired,
 				fireDelay:this.fireDelay,
 				fireX:this.fireX,
 				fireY:this.fireY,
@@ -1597,6 +1598,12 @@ function mouseMoved(){
 		player.crosshair.y=mouseY;
 	}
 }
+function mouseDragged(){
+	if(player){
+		player.crosshair.x=mouseX;
+		player.crosshair.y=mouseY;
+	}
+}
 function menu(){
 
 }//Menu
@@ -1718,6 +1725,7 @@ function checkPlayers(){
 						NotGoingToWork.canJump=data2.canJump;
 						NotGoingToWork.colliding=data2.colliding;
 						NotGoingToWork.crosshair = createVector(data2.crosshair.x,data2.crosshair.y,data2.crosshair.z);
+						NotGoingToWork.fired=data2.fired;
 						NotGoingToWork.fireDelay=data2.fireDelay;
 						NotGoingToWork.fireX=data2.fireX;
 						NotGoingToWork.fireY=data2.fireY;
