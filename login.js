@@ -33,10 +33,10 @@ function signInWithGoogle(){
 	firebase.auth().signInWithRedirect(provider);
 }
 function signOut(){
+	firebase.database().ref('arcade/users/'+currentUser.uid).update({
+		online: false
+	});
 	firebase.auth().signOut().then(function() {
-		firebase.database().ref('arcade/users/'+currentUser.uid).update({
-			online: false
-		});
 		location.reload();
 	}).catch(function(error) {
 	  // An error happened.
