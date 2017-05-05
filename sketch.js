@@ -1706,18 +1706,6 @@ function checkPlayers(){
 						NotGoingToWork.HP=data2.HP;
 						var FixingProj = data2.Projectiles || [];
 						var NewProj = FixingProj;
-						if(FixingProj.length > 0){
-							for(var j = 0; j < FixingProj.length; j++){
-								NotGoingToWork.Projectiles[j]=new Projectile(
-									createVector(FixingProj[j].target.x,FixingProj[j].target.y,FixingProj[j].target.z), // Target
-									FixingProj[j].bulletName,
-									NotGoingToWork,
-									FixingProj[j].id
-								);
-							}
-						}else{
-							NotGoingToWork.Projectiles=[];
-						}
 						NotGoingToWork.acc=createVector(data2.acc.x,data2.acc.y,data2.acc.z);
 						NotGoingToWork.angle=data2.angle;
 						NotGoingToWork.bulletName = data2.bulletName;
@@ -1743,6 +1731,9 @@ function checkPlayers(){
 						NotGoingToWork.radius=data2.radius;
 						NotGoingToWork.target = createVector(data2.target.x,data2.target.y,data2.target.z);
 						NotGoingToWork.vel = createVector(data2.vel.x,data2.vel.y,data2.vel.z);
+						if(NotGoingToWork.fired[NotGoingToWork.bullet.name]){
+							NotGoingToWork.fire();
+						}
 					}
 				});
 			}
