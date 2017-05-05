@@ -872,6 +872,7 @@ function Entity(x,y,radius,name,maxHP,bullet,isPlayer,mainPlayer){
     right:false,
     bottom:false,
     };
+	this.leftClick=false;
     this.canJump = false;
     this.jumpCount = 0;
     this.maxJumps = 1;
@@ -1140,6 +1141,7 @@ function Entity(x,y,radius,name,maxHP,bullet,isPlayer,mainPlayer){
 				fired:this.fired,
 				hasControls:this.hasControls,
 				isPlayer:this.isPlayer,
+				leftClick:this.leftClick,
 				mainPlayer:false,
 				hyp:this.hyp,
 				id:currentUser.uid,
@@ -1220,6 +1222,10 @@ function Entity(x,y,radius,name,maxHP,bullet,isPlayer,mainPlayer){
 		    }
 		}
 	    }
+		if(this.leftClick){
+			this.fire();
+			this.leftClick=false;
+		}
 	}
 	this.pos.add(this.vel);
         for(var i = 0; i < this.Projectiles.length; i++){
@@ -1283,9 +1289,9 @@ function Entity(x,y,radius,name,maxHP,bullet,isPlayer,mainPlayer){
 
 function keyPressed(){
     keys[keyCode]=true;
-  	if(keys[103]){
-    	player.pos = createVector(mouseX,mouseY); // Teleport
-    }
+	if(keys[103]){
+		player.pos = createVector(mouseX,mouseY); // Teleport
+	}
 }
 function keyReleased(){
     keys[keyCode]=false;
@@ -1544,8 +1550,7 @@ p1c = {
         isMouse:false,
         a:1,
         func:function(ent){
-            ent.aim(ent.target.x,ent.target.y);
-            ent.fire();
+            ent.leftClick = true;
         },
     },
     fireMouse:{
@@ -1554,8 +1559,7 @@ p1c = {
         isMouse:true,
         a:1,
         func:function(ent){
-            ent.aim(ent.target.x,ent.target.y);
-            ent.fire();
+            ent.leftClick = true;
         },
     },
     setGun_minigun:{
@@ -1717,9 +1721,9 @@ function checkPlayers(){
 						NotGoingToWork.fireDelay=data2.fireDelay;
 						NotGoingToWork.fireX=data2.fireX;
 						NotGoingToWork.fireY=data2.fireY;
-						NotGoingToWork.fired=data2.fired;
 						NotGoingToWork.hasControls=data2.hasControls;
 						NotGoingToWork.isPlayer=data2.isPlayer;
+						NotGoingToWork.leftClick=data2.leftClick;
 						NotGoingToWork.mainPlayer=false;
 						NotGoingToWork.hyp=data2.hyp;
 						NotGoingToWork.id = data2.id;
@@ -1731,9 +1735,9 @@ function checkPlayers(){
 						NotGoingToWork.radius=data2.radius;
 						NotGoingToWork.target = createVector(data2.target.x,data2.target.y,data2.target.z);
 						NotGoingToWork.vel = createVector(data2.vel.x,data2.vel.y,data2.vel.z);
-						if(!NotGoingToWork.fired[NotGoingToWork.bullet.name]){
-							NotGoingToWork.fire();
-						}
+// 						if(NotGoingToWork.fired[NotGoingToWork.bullet.name]){
+// 							NotGoingToWork.fire();
+// 						}
 					}
 				});
 			}
