@@ -1310,10 +1310,12 @@ function keyReleased(){
     keys[keyCode]=false;
 }
 function mousePressed(){
-    mouse[mouseButton]=true;
-    for(var i = 0; i < buttons.length; i++){
-        buttons[i].onClick();
-    }
+	if(mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < height){
+	    mouse[mouseButton]=true;
+	    for(var i = 0; i < buttons.length; i++){
+		buttons[i].onClick();
+	    }
+	}
 }
 function mouseReleased(){
     mouse[mouseButton]=false;
