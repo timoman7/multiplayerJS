@@ -1223,9 +1223,9 @@ function Entity(x,y,radius,name,maxHP,bullet,isPlayer,mainPlayer){
 		    }
 		}
 	    }
-		if(this.leftClick){
-			this.fire();
-		}
+	}
+	if(this.leftClick){
+		this.fire();
 	}
 	this.pos.add(this.vel);
         for(var i = 0; i < this.Projectiles.length; i++){
@@ -1399,7 +1399,40 @@ rocketBullet:{
 // x, y, bullet name, radius, detection range, maxHP, name
 test = new Gun(200,200,"enemyBullet",20,100,100,"gun");
 if(currentUser){
-	player = new Entity(random(0,width),random(0,height),20,currentUser.uid,100,"minigunBullet", true, true);
+	firebase.database().ref("arcade/users").once('value').then(function(data){
+		if(data.child(currentUser.uid).exists()){
+			var data2 = data.child(currentUser.uid).val();
+			player = new Entity(
+				data2.pos.x,		//X Position
+				data2.pos.y,		//Y Position
+				data2.radius,		//Radius of body
+				currentUser.uid,	//ID of user
+				data2.maxHP,		//Max Health
+				data2.bulletName,	//Name of bullet
+				true,			//Is a player: Most likely
+				true			//Is main player: NO
+			);
+			player.HP=data2.HP;
+			player.bulletName = data2.bulletName;
+			player.bullet=allBullets[data2.bulletName];
+			player.canJump=data2.canJump;
+			player.crosshair = createVector(data2.crosshair.x,data2.crosshair.y,data2.crosshair.z);
+			player.fired=data2.fired;
+			player.fireDelay=data2.fireDelay;
+			player.isPlayer=true;
+			player.leftClick=data2.leftClick;
+			player.mainPlayer=true;
+			player.id = data2.id;
+			player.jumpCount=data2.jumpCount;
+			player.jumpForce = createVector(data2.jumpForce.x,data2.jumpForce.y,data2.jumpForce.z);
+			player.maxHP=data2.maxHP;
+			player.maxJumps=data2.maxJumps;
+			player.pos = createVector(data2.pos.x,data2.pos.y,data2.pos.z);
+			player.radius=data2.radius;
+		}else{
+			player = new Entity(random(0,width),random(0,height),20,currentUser.uid,100,"minigunBullet", true, true);
+		}
+	});
 }else{
 	player = new Entity(random(0,width),random(0,height),20,"player",100,"minigunBullet", true, true);
 }
