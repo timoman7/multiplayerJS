@@ -32,6 +32,11 @@ function signInWithGoogle(){
 	provider = new firebase.auth.GoogleAuthProvider();
 	firebase.auth().signInWithRedirect(provider);
 }
+function signInWithGithub(){
+	var provider;
+	provider = new firebase.auth.GithubAuthProvider();
+	firebase.auth().signInWithRedirect(provider);
+}
 function signOut(){
 	firebase.database().ref('arcade/users/'+currentUser.uid).update({
 		online: false
