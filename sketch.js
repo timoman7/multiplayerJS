@@ -1153,6 +1153,7 @@ function Entity(x,y,radius,name,maxHP,bullet,isPlayer,mainPlayer){
 				hasControls:this.hasControls,
 				isPlayer:this.isPlayer,
 				leftClick:this.leftClick,
+				online:true,
 				mainPlayer:false,
 				hyp:this.hyp,
 				id:currentUser.uid,
