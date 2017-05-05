@@ -16,6 +16,7 @@ setInterval(function(){
 firebase.auth().getRedirectResult().then(function(result){
 	var user = result.user;
 	var credential = result.credential;
+	console.log(result);
 	if(user === null){
 	}else{
 		currentUser = firebase.auth().currentUser;
