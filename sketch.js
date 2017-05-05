@@ -1315,7 +1315,7 @@ function mouseReleased(){
 //Mouse & Key Events
 
 function setup(){
-  createCanvas(1200,800);
+  createCanvas(1200,720);
 	frameRate(60);
   colorMode(RGB);
   angleMode(DEGREES);
