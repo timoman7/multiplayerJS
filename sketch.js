@@ -871,11 +871,7 @@ function Entity(x,y,radius,name,maxHP,bullet,isPlayer,mainPlayer){
     this.crosshair=createVector(mouseX,mouseY);
 	this.isPlayer = isPlayer || false;
 	this.mainPlayer = mainPlayer || false;
-	if(this.isPlayer && this.mainPlayer && currentUser){
-		this.online = true;
-	}else{
-		this.online = false;
-	}
+	this.online = false;
     this.colliding={
     left:false,
     top:false,
@@ -967,6 +963,11 @@ function Entity(x,y,radius,name,maxHP,bullet,isPlayer,mainPlayer){
         }
     };
     this.checkCollisions=function(){
+	    if(this.isPlayer && this.mainPlayer && currentUser){
+		this.online = true;
+	}else{
+		this.online = false;
+	}
         this.colliding={
             left:false,right:false,top:false,bottom:false};
         for(var i = 0; i < platforms.length; i++){
