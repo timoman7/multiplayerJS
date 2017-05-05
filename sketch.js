@@ -1309,12 +1309,14 @@ function keyPressed(){
 function keyReleased(){
     keys[keyCode]=false;
 }
-function mousePressed(){
-	if(mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < height){
-	    mouse[mouseButton]=true;
-	    for(var i = 0; i < buttons.length; i++){
-		buttons[i].onClick();
-	    }
+function mousePressed(e){
+	if(e.target){
+		if(e.target.tagName === "CANVAS"){
+		    mouse[mouseButton]=true;
+		    for(var i = 0; i < buttons.length; i++){
+			buttons[i].onClick();
+		    }
+		}
 	}
 }
 function mouseReleased(){
