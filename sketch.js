@@ -1,7 +1,19 @@
 //ERROR TAKES PLACE IN SETUP
-var globals, allBullets, globalUsers, users, keys, mouse, buttons, platforms, f, fp, fps, framerate, framess, bullet_sound, bullet_hit, rocket_sound, rocket_explode, state, dbug, gravity, bg, player, test, testPlat, testPlat2, Tau, enemyBullet, minigunBullet, defaultBullet, rocketBullet, p1c, setBG, backToMenu, backToMenu2, backToMenu3, playGame, helpBtn, testDrop, bgR, bgG, bgB, bgrP1Btn, bgrP5Btn, bgrP10Btn, bgrM1Btn, bgrM5Btn, bgrM10Btn, bggP1Btn, bggP5Btn, bggP10Btn, bggM1Btn, bggM5Btn, bggM10Btn, bgbP1Btn, bgbP5Btn, bgbP10Btn, bgbM1Btn, bgbM5Btn, bgbM10Btn;
+var globals, allBullets, globalUsers, users, keys, mouse, buttons, tempPlatforms, platforms, f, fp, fps, framerate, framess, bullet_sound, bullet_hit, rocket_sound, rocket_explode, state, dbug, gravity, bg, player, test, testPlat, testPlat2, Tau, enemyBullet, minigunBullet, defaultBullet, rocketBullet, p1c, setBG, backToMenu, backToMenu2, backToMenu3, playGame, helpBtn, testDrop, bgR, bgG, bgB, bgrP1Btn, bgrP5Btn, bgrP10Btn, bgrM1Btn, bgrM5Btn, bgrM10Btn, bggP1Btn, bggP5Btn, bggP10Btn, bggM1Btn, bggM5Btn, bggM10Btn, bgbP1Btn, bgbP5Btn, bgbP10Btn, bgbM1Btn, bgbM5Btn, bgbM10Btn;
 //Sin angle / hyp = Y
 //Cos angle / hyp = X
+firebase.database().ref('arcade/platforms').on('value',function(data){
+	if(Platform){
+		platforms = [];
+		tempPlatforms = Object.values(data.val()).filter(function(ent){
+			return ent.width && ent.height && ent.x && ent.y
+		});
+		for(var i = 0; i < tempPlatforms.length; i++){
+			var tempP = tempPlatforms[i];
+			platforms[i] = new Platform(tempP.x, tempP.y, tempP.width, tempP.height);
+		}
+	}
+});
 firebase.database().ref('arcade/users').on('value',function(data){
 	users = {};
 	if(currentUser){
@@ -398,7 +410,6 @@ function Platform(x,y,width,height){
             line(this.pos.x+(this.width/2),this.pos.y-(this.height/2),this.pos.x+(this.width/2),this.pos.y+(this.height/2));
         }
     };
-    platforms.push(this);
 }
 function blastForce(bullet,hit){
     this.proj = bullet;
@@ -1453,8 +1464,6 @@ if(currentUser){
 }else{
 	player = new Entity(random(0,width),random(0,height),20,"player",100,"minigunBullet", true, true);
 }
-testPlat = new Platform(width/2,(height/8)*7,400,80);
-testPlat2 = new Platform((width/6)*4,(height/8)*6,200,80);
 
 for(var i = 0; i < 2; i++){
 new Entity(random(0,width),random(0,height),20,"target",20);
