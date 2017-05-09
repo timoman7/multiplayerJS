@@ -26,8 +26,10 @@
     <script type="text/javascript">
       var app = angular.module('Panel',[]);
       app.controller('UsersOnline',function($scope){
-        if(users){
-           $scope.UsersOnline = users;
+        while(users){
+          if(users){
+             $scope.UsersOnline = users;
+          }
         }
       });
     </script>
