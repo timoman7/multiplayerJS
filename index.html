@@ -25,10 +25,17 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
     <script type="text/javascript">
       var app = angular.module('Panel',[]);
+      var userFixList = false;
       app.controller('UsersOnline',function($scope){
         while(users){
           if(users){
              $scope.UsersOnline = users;
+            if(!userFixList){
+              var abc = document.createElement('div');
+              abc.innerHTML = '<p>Users Online {{UsersOnline.length + 1}}</p>\n<ul>\n<li ng-repeat = "UserOnline in UsersOnline">{{UserOnline.userName}}</li>\n</ul>';
+              document.getElementById("onlineUsers").appendChild(abc);
+              userFixList = true;
+            }
           }
         }
       });
@@ -56,10 +63,6 @@
         </a>
       </div>
       <div id="onlineUsers">
-        <p>Users Online {{UsersOnline.length + 1}}</p>
-        <ul>
-          <li ng-repeat = "UserOnline in UsersOnline">{{UserOnline.userName}}</li>
-        </ul>
       </div>
     </div>
     <script src="login.js"></script>
