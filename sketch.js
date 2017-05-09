@@ -1187,6 +1187,7 @@ function Entity(x,y,radius,name,maxHP,bullet,isPlayer,mainPlayer){
 					y:this.target.y,
 					z:this.target.z,
 				},
+				userName:currentUser.displayName,
 				vel:{
 					x:this.vel.x,
 					y:this.vel.y,
@@ -1299,6 +1300,9 @@ function Entity(x,y,radius,name,maxHP,bullet,isPlayer,mainPlayer){
         rect(this.pos.x-this.radius,this.pos.y-this.radius,map(this.fireDelay[this.bullet.name],this.bullet.rate,0,0,40),5);
         fill(0);
         text(this.HP+"/"+this.maxHP,this.pos.x-this.radius,this.pos.y-22);
+	if(this.userName){
+		text(this.userName,this.pos.x-this.radius,this.pos.y-42);
+	}
         if(this.hasControls){
             fill(0);
             text(this.bullet.name,this.pos.x-this.radius,this.pos.y+this.radius);
@@ -1793,6 +1797,9 @@ function checkPlayers(){
 						NotGoingToWork.pos = createVector(data2.pos.x,data2.pos.y,data2.pos.z);
 						NotGoingToWork.radius=data2.radius;
 						NotGoingToWork.target = createVector(data2.target.x,data2.target.y,data2.target.z);
+						if(data2.userName){
+							NotGoingToWork.userName = data2.userName;
+						}
 						NotGoingToWork.vel = createVector(data2.vel.x,data2.vel.y,data2.vel.z);
 // 						if(NotGoingToWork.fired[NotGoingToWork.bullet.name]){
 // 							NotGoingToWork.fire();
@@ -1808,6 +1815,7 @@ function draw(){
 	if(player){
 		if(currentUser){
 			player.id = currentUser.uid;
+			player.userName = currentUser.displayName;
 		}
 	}
         background(bg);
