@@ -92,6 +92,13 @@
           </li>
         </ul>
       </div>
+      <div id="messagingPanel">
+        <ul>
+          <li ng-repeat="Message in Messages" title="{{Message.timestamp}}">
+            {{Message.user + ": " + Message.msg}}
+          </li>
+        </ul>
+      </div>
     </div>
     <script src="login.js"></script>
     <script src="sketch.js"></script>
