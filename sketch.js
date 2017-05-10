@@ -39,18 +39,6 @@ firebase.database().ref('arcade/users').on('value',function(data){
 	_app.controller('myCtrl',function($scope){
 		if(users){
 			$scope.UsersOnline = users;
-			if(!userFixList){
-				var abc = document.createElement('p');
-				abc.innerHTML = 'Users Online {{UsersOnline.length + 1}}';
-				document.getElementById("onlineUsers").appendChild(abc);
-				var def = document.createElement('ul');
-				var ghi = document.createElement('li');
-				ghi.setAttribute('ng-repeat',"UserOnline in UsersOnline");
-				ghi.innerHTML="{{UserOnline.userName}}";
-				def.appendChild(ghi);
-				document.getElementBydId("onlineUsers").appendChild(def);
-				userFixList = true;
-			}
 		}
 	});
 });
