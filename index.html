@@ -32,10 +32,12 @@
     
     <script type="text/javascript">
       var app = angular.module('Panel',[]);
+      var placeholderObject;
       setInterval(function(){
         app.controller('myCtrl',function($scope){
           if(users){
-           $scope.UsersOnline = users;
+           placeholderObject = users;
+           $scope.UsersOnline = placeholderObject;
            if(currentUser){
             $scope.UsersOnline[currentUser.uid] = {userName:currentUser.displayName};
            }
@@ -64,7 +66,7 @@
           <button type="button">Log out</button>
         </a>
       </div>
-      <div id="onlineUsers">
+      <div id="onlineUsers" style="width: 100px">
         <p>Users Online {{UsersOnline.length}}</p>
         <ul>
           <li ng-repeat="UserOnline in UsersOnline">
