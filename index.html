@@ -39,14 +39,15 @@
       });
       setInterval(function(){
         if(users){
-         placeholderObject = jQuery.extend(true, {}, users);
-         if(currentUser){
-          placeholderObject[currentUser.uid] = {userName:currentUser.displayName};
-         }
-         glob.UsersOnline = placeholderObject;
-         if(glob.UsersOnline === placeholderObject){
-           glob.$apply();
-         }
+          placeholderObject = jQuery.extend(true, {}, users);
+          if(currentUser){
+            placeholderObject[currentUser.uid] = {userName:currentUser.displayName};
+          }
+          if(glob.UsersOnline === placeholderObject){
+            glob.$apply();
+          }else{
+            glob.UsersOnline = placeholderObject;
+          }
         }
       },100);
       var abcd = 10;
