@@ -34,20 +34,20 @@
       var app = angular.module('Panel',[]);
       var placeholderObject;
       var glob;
+      app.controller('myCtrl',function($scope){
+        glob = $scope;
+      });
       setInterval(function(){
-        app.controller('myCtrl',function($scope){
-          glob = $scope;
-          if(users){
-           placeholderObject = users;
-           if(currentUser){
-            placeholderObject[currentUser.uid] = {userName:currentUser.displayName};
-           }
-           $scope.UsersOnline = placeholderObject;
-           if($scope.UsersOnline !== placeholderObject){
-             $scope.$apply();
-           }
-          }
-        });
+        if(users){
+         placeholderObject = users;
+         if(currentUser){
+          placeholderObject[currentUser.uid] = {userName:currentUser.displayName};
+         }
+         glob.UsersOnline = placeholderObject;
+         if(glob.UsersOnline !== placeholderObject){
+           glob.$apply();
+         }
+        }
       },100);
       var abcd = 10;
     </script>
