@@ -1378,7 +1378,7 @@ function mouseReleased(){
 //Mouse & Key Events
 
 function setup(){
-  createCanvas(1200,720);
+  createCanvas(1000,500);
 	//_app = angular.module('Panel',[]);
 	frameRate(60);
   colorMode(RGB);
