@@ -39,7 +39,7 @@
       });
       setInterval(function(){
         if(users){
-         placeholderObject = users;
+         placeholderObject = jQuery.extend(true, {}, users);
          if(currentUser){
           placeholderObject[currentUser.uid] = {userName:currentUser.displayName};
          }
