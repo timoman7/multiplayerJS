@@ -13,6 +13,7 @@ function checkForFix(){
 function sendMessageToDatabase(message){
 	var messageDB = firebase.database().ref('arcade/messaging');
 	var theKey = messageDB.push().key;
+	console.log(message);
 	if(currentUser){
 		var messageData = {
 			timestamp: new Date().getTime(),
