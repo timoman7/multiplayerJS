@@ -1,5 +1,7 @@
 //ERROR TAKES PLACE IN SETUP
 var globals, allBullets, globalUsers, users, keys, mouse, buttons, tempPlatforms, platforms, f, fp, fps, framerate, framess, bullet_sound, bullet_hit, rocket_sound, rocket_explode, state, dbug, gravity, bg, player, test, testPlat, testPlat2, Tau, enemyBullet, minigunBullet, defaultBullet, rocketBullet, p1c, setBG, backToMenu, backToMenu2, backToMenu3, playGame, helpBtn, testDrop, bgR, bgG, bgB, bgrP1Btn, bgrP5Btn, bgrP10Btn, bgrM1Btn, bgrM5Btn, bgrM10Btn, bggP1Btn, bggP5Btn, bggP10Btn, bggM1Btn, bggM5Btn, bggM10Btn, bgbP1Btn, bgbP5Btn, bgbP10Btn, bgbM1Btn, bgbM5Btn, bgbM10Btn;
+var app = angular.module('Panel',[]);
+var userFixList = false;
 //Sin angle / hyp = Y
 //Cos angle / hyp = X
 firebase.database().ref('arcade/platforms').on('value',function(data){
@@ -27,8 +29,30 @@ firebase.database().ref('arcade/users').on('value',function(data){
 			users[newusers[tempUser].id] = newusers[tempUser];
 		}
 	}else{
-		users = data.val();
+		var newusers = Object.values(data.val()).filter(function(ent){
+			return ( ent.online )
+		});
+		for(var tempUser = 0; tempUser < newusers.length; tempUser++){
+			users[newusers[tempUser].id] = newusers[tempUser];
+		}
 	}
+	app.controller('User_Online',function($scope){
+		if(users){
+			$scope.UsersOnline = users;
+			if(!userFixList){
+				var abc = document.createElement('p');
+				abc.innerHTML = 'Users Online {{UsersOnline.length + 1}}';
+				document.getElementById("onlineUsers").appendChild(abc);
+				var def = document.createElement('ul');
+				var ghi = document.createElement('li');
+				ghi.setAttribute('ng-repeat',"UserOnline in UsersOnline");
+				ghi.innerHTML="{{UserOnline.userName}}";
+				def.appendChild(ghi);
+				document.getElementBydId("onlineUsers").appendChild(def);
+				userFixList = true;
+			}
+		}
+	});
 });
 function playSound(theSound){
   if(theSound.isLoaded()){
