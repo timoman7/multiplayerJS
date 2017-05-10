@@ -34,6 +34,7 @@
       var app = angular.module('Panel',[]);
       var placeholderObject;
       var glob;
+      var previousUL = document.getElementById('onlineUsers');
       app.controller('myCtrl',function($scope){
         glob = $scope;
       });
@@ -43,8 +44,9 @@
           if(currentUser){
             placeholderObject[currentUser.uid] = {userName:currentUser.displayName};
           }
-          if(glob.UsersOnline === placeholderObject){
+          if(glob.UsersOnline === placeholderObject || (previousUL !== document.getElementById('onlineUsers'))){
             glob.$apply();
+            previousUL = document.getElementById('onlineUsers');
           }else{
             glob.UsersOnline = placeholderObject;
           }
