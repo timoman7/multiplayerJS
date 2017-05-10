@@ -33,10 +33,14 @@
     <script type="text/javascript">
       var app = angular.module('Panel',[]);
       var placeholderObject;
+      var Messages;
       var glob;
       var previousUL = document.getElementById('onlineUsers');
       app.controller('myCtrl',function($scope){
         glob = $scope;
+        $scope.reset = function(){
+          $scope.MessageToSend = "";
+        };
       });
       setInterval(function(){
         if(users){
@@ -44,14 +48,11 @@
           if(currentUser){
             placeholderObject[currentUser.uid] = {userName:currentUser.displayName};
           }
-          if(glob.UsersOnline === placeholderObject){
-            
-          }else{
-            glob.UsersOnline = placeholderObject;
-          }
+          glob.UsersOnline = placeholderObject;
         }
         if(messages){
-          
+          Messages = jQuery.extend(true, {}, messages);
+          glob.Messages = Messages;
         }
       },100);
       setInterval(function(){
@@ -98,6 +99,10 @@
             {{Message.user + ": " + Message.msg}}
           </li>
         </ul>
+        <form action="javascript:sendMessageToDatabase({{MessageToSend}});void(0);">
+          <input type='text' ng-model="MessageToSend"/>
+          <button hidden ng-click="reset()">ResetSend</button>
+        </form>
       </div>
     </div>
     <script src="login.js"></script>
