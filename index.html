@@ -28,13 +28,13 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script type="text/javascript">
       var app = angular.module('Panel',[]);
-      app.controller('myCtrl',function($scope){
-        while(true){
+      setInterval(function(){
+        app.controller('myCtrl',function($scope){
           if(users){
-             $scope.UsersOnline = users;
+           $scope.UsersOnline = users;
           }
-        }
-      });
+        });
+      },100);
     </script>
     <script src="libraries/p5.js" type="text/javascript"></script>
     <script src="libraries/p5.dom.js" type="text/javascript"></script>
