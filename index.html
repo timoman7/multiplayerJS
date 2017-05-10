@@ -44,14 +44,23 @@
           if(currentUser){
             placeholderObject[currentUser.uid] = {userName:currentUser.displayName};
           }
-          if(glob.UsersOnline === placeholderObject || (previousUL !== document.getElementById('onlineUsers'))){
-            glob.$apply();
-            previousUL = document.getElementById('onlineUsers');
+          if(glob.UsersOnline === placeholderObject){
+            
           }else{
             glob.UsersOnline = placeholderObject;
           }
         }
       },100);
+      setInterval(function(){
+        if(users){
+          if(glob){
+            if(glob.UsersOnline){
+              glob.$apply();
+            }
+          }
+        }
+      },250);
+      //Dear god this is inefficient
       var abcd = 10;
     </script>
     
