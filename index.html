@@ -26,14 +26,20 @@
     <script type="text/javascript">
       var app = angular.module('Panel',[]);
       var userFixList = false;
-      app.controller('UsersOnline',function($scope){
+      app.controller('User_Online',function($scope){
         while(users){
           if(users){
              $scope.UsersOnline = users;
             if(!userFixList){
-              var abc = document.createElement('div');
-              abc.innerHTML = '<p>Users Online {{UsersOnline.length + 1}}</p>\n<ul>\n<li ng-repeat = "UserOnline in UsersOnline">{{UserOnline.userName}}</li>\n</ul>';
+              var abc = document.createElement('p');
+              abc.innerHTML = 'Users Online {{UsersOnline.length + 1}}';
               document.getElementById("onlineUsers").appendChild(abc);
+              var def = document.createElement('ul');
+              var ghi = document.createElement('li');
+              ghi.setAttribute('ng-repeat',"UserOnline in UsersOnline");
+              ghi.innerHTML="{{UserOnline.userName}}";
+              def.appendChild(ghi);
+              document.getElementBydId("onlineUsers").appendChild(def);
               userFixList = true;
             }
           }
@@ -48,7 +54,7 @@
     <script src="libraries/p5.sound.js" type="text/javascript"></script>
   </head>
   <body>
-    <div style="background-color: RGBA(0,0,0,0); right: 0px; top: 0px; position:absolute; z-index:25;" ng-app="Panel">
+    <div style="background-color: RGBA(0,0,0,0); right: 0px; top: 0px; position:absolute; z-index:25;" ng-app="Panel" ng-controller="User_Online">
       <div id="Button_Holder">
         <a class="Login" onclick="signInWithGoogle(); return false;">
           <button type="button">Sign in with Google</button>
