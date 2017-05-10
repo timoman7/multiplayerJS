@@ -10,6 +10,10 @@ function checkForFix(){
 	}
 	return false
 }
+function sendMessageToDatabase(message){
+	var messageDB = firebase.database().ref('arcade/messaging');
+	console.log(messageDB.push(),message);
+}
 firebase.database().ref('arcade/platforms').on('value',function(data){
 	if(Platform){
 		platforms = [];
@@ -34,6 +38,7 @@ firebase.database().ref('arcade/messaging').on('value',function(data){
 		}
 	});
 	//Sort messages by time
+	
 });
 firebase.database().ref('arcade/users').on('value',function(data){
 	users = {};
