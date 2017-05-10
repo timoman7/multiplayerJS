@@ -38,15 +38,14 @@
         app.controller('myCtrl',function($scope){
           glob = $scope;
           if(users){
-            if($scope.UsersOnline !== users){
-              $scope.$apply(function(){
-               placeholderObject = users;
-               $scope.UsersOnline = placeholderObject;
-               if(currentUser){
-                $scope.UsersOnline[currentUser.uid] = {userName:currentUser.displayName};
-               }
-              });
-            }
+           placeholderObject = users;
+           $scope.UsersOnline = placeholderObject;
+           if(currentUser){
+            $scope.UsersOnline[currentUser.uid] = {userName:currentUser.displayName};
+           }
+           if($scope.UsersOnline !== users){
+             $scope.$apply();
+           }
           }
         });
       },100);
