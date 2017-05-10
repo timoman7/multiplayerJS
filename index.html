@@ -48,11 +48,15 @@
           if(currentUser){
             placeholderObject[currentUser.uid] = {userName:currentUser.displayName};
           }
-          glob.UsersOnline = placeholderObject;
+          if(glob){
+            glob.UsersOnline = placeholderObject;
+          }
         }
         if(messages){
           Messages = jQuery.extend(true, {}, messages);
-          glob.Messages = Messages;
+          if(glob){
+            glob.Messages = Messages;
+          }
         }
       },100);
       setInterval(function(){
