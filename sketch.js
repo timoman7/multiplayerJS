@@ -17,16 +17,17 @@ function sendMessageToDatabase(message){
 	if(currentUser){
 		var messageData = {
 			timestamp: new Date().getTime(),
-			msg: message,
+			msg: message.value,
 			from: currentUser.uid,
 			username: currentUser.displayName
 		};
-		if(!message.includes("script") && message.length > 0){
+		if(!message.value.includes("script") && message.value.length > 0){
 			messageDB.child('message_'+theKey).set(messageData);
 		}
 	}else{
 		alert("You are not logged in.");
 	}
+	message.value="";
 }
 firebase.database().ref('arcade/platforms').on('value',function(data){
 	if(Platform){
