@@ -68,6 +68,8 @@
       </div>
       <div id="onlineUsers" style="width: 100px">
         <p>Users Online {{UsersOnline.length}}</p>
+        <p ng-bind="UsersOnline"></p>
+        <p ng-bind="UsersOnline.length"></p>
         <ul>
           <li ng-repeat="UserOnline in UsersOnline">
             {{UserOnline.userName}}
