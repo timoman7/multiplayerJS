@@ -26,13 +26,22 @@
     
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    
+    <script type="text/javascript">
+      var app = angular.module('Panel',[]);
+      app.controller('myCtrl',function($scope){
+        while(true){
+          if(users){
+             $scope.UsersOnline = users;
+          }
+        }
+      });
+    </script>
     <script src="libraries/p5.js" type="text/javascript"></script>
     <script src="libraries/p5.dom.js" type="text/javascript"></script>
     <script src="libraries/p5.sound.js" type="text/javascript"></script>
   </head>
   <body>
-    <div style="background-color: RGBA(0,0,0,0); right: 0px; top: 0px; position:absolute; z-index:25;" ng-app="Panel" ng-controller="myCtrl" ng-init="UsersOnline = [{userName:'test'}]">
+    <div style="background-color: RGBA(0,0,0,0); right: 0px; top: 0px; position:absolute; z-index:25;" ng-app="Panel" ng-controller="myCtrl">
       <div id="Button_Holder">
         <a class="Login" onclick="signInWithGoogle(); return false;">
           <button type="button">Sign in with Google</button>
@@ -46,7 +55,7 @@
           <button type="button">Log out</button>
         </a>
       </div>
-      <div id="onlineUsers">
+      <div id="onlineUsers" ng-init="UsersOnline = [{userName:'test'}]">
         <p>Users Online {{UsersOnline.length + 1}}</p>
         <ul>
           <li ng-repeat="UserOnline in UsersOnline">
