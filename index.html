@@ -100,7 +100,7 @@
       <div id="messagingPanel">
         <ul>
           <li ng-repeat="Message in Messages" title="{{Message.timestamp}}">
-            {{Message.user + ": " + Message.msg}}
+            {{Message.username + ": " + Message.msg}}
           </li>
         </ul>
         <form action="javascript:void(0)" onsubmit="sendMessageToDatabase(MessageToSend); return false">
