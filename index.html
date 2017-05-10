@@ -33,8 +33,10 @@
     <script type="text/javascript">
       var app = angular.module('Panel',[]);
       var placeholderObject;
+      var glob;
       setInterval(function(){
         app.controller('myCtrl',function($scope){
+          glob = $scope;
           if(users){
            placeholderObject = users;
            $scope.UsersOnline = placeholderObject;
