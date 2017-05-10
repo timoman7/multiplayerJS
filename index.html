@@ -75,7 +75,7 @@
     <script src="libraries/p5.sound.js" type="text/javascript"></script>
   </head>
   <body>
-    <div style="background-color: RGBA(0,0,0,0); right: 0px; top: 0px; position:absolute; z-index:25;" ng-app="Panel" ng-controller="myCtrl">
+    <div style="background-color: RGBA(0,0,0,0); right: 0px; top: 0px; position:absolute; z-index:25; height: 15%" ng-app="Panel" ng-controller="myCtrl">
       <div id="Button_Holder">
         <a class="Login" onclick="signInWithGoogle(); return false;">
           <button type="button">Sign in with Google</button>
@@ -89,7 +89,8 @@
           <button type="button">Log out</button>
         </a>
       </div>
-      <div id="onlineUsers" style="width: 200px">
+    </div>
+      <div id="onlineUsers" style="width: 200px; right: 0px; top: 15%; height:35%; y-overflow: scroll; position:absolute;">
         <p>Users Online <span class="badge" ng-bind="UsersOnline.length"></span></p>
         <ul>
           <li ng-repeat="UserOnline in UsersOnline">
@@ -97,17 +98,16 @@
           </li>
         </ul>
       </div>
-      <div id="messagingPanel">
-        <ul>
-          <li ng-repeat="Message in Messages" title="{{new Date(Message.timestamp).toGMTString()}}">
-            {{Message.username + ": " + Message.msg}}
-          </li>
-        </ul>
-        <form action="javascript:void(0)" onsubmit="sendMessageToDatabase(MessageToSend); return false">
-          <input type='text' name="MessageToSend" ng-model="MessageToSend"/>
-          <button hidden ng-click="">ResetSend</button>
-        </form>
-      </div>
+    <div id="messagingPanel" style="bottom: 0px; right: 0px; width: 200px; height: 50%; y-overflow">
+      <ul style="bottom: 10%; height: 90%">
+        <li ng-repeat="Message in Messages" title="{{new Date(Message.timestamp).toGMTString()}}">
+          {{Message.username + ": " + Message.msg}}
+        </li>
+      </ul>
+      <form action="javascript:void(0)" style="height: 10%; bottom: 0px;" onsubmit="sendMessageToDatabase(MessageToSend); return false">
+        <input type='text' name="MessageToSend" ng-model="MessageToSend"/>
+        <button hidden ng-click="">ResetSend</button>
+      </form>
     </div>
     <script src="login.js"></script>
     <script src="sketch.js"></script>
