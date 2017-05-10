@@ -39,10 +39,10 @@
           glob = $scope;
           if(users){
            placeholderObject = users;
-           $scope.UsersOnline = placeholderObject;
            if(currentUser){
-            $scope.UsersOnline[currentUser.uid] = {userName:currentUser.displayName};
+            placeholderObject[currentUser.uid] = {userName:currentUser.displayName};
            }
+           $scope.UsersOnline = placeholderObject;
            if($scope.UsersOnline !== users){
              $scope.$apply();
            }
