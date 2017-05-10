@@ -44,7 +44,7 @@
           placeholderObject[currentUser.uid] = {userName:currentUser.displayName};
          }
          glob.UsersOnline = placeholderObject;
-         if(glob.UsersOnline !== placeholderObject){
+         if(glob.UsersOnline === placeholderObject){
            glob.$apply();
          }
         }
@@ -72,9 +72,7 @@
         </a>
       </div>
       <div id="onlineUsers" style="width: 100px">
-        <p>Users Online {{UsersOnline.length}}</p>
-        <p ng-bind="UsersOnline"></p>
-        <p ng-bind="UsersOnline.length"></p>
+        <p>Users Online <span class="badge">{{UsersOnline.length}}</span></p>
         <ul>
           <li ng-repeat="UserOnline in UsersOnline">
             {{UserOnline.userName}}
