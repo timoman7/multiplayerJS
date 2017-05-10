@@ -43,7 +43,7 @@
             placeholderObject[currentUser.uid] = {userName:currentUser.displayName};
            }
            $scope.UsersOnline = placeholderObject;
-           if($scope.UsersOnline !== users){
+           if($scope.UsersOnline !== placeholderObject){
              $scope.$apply();
            }
           }
