@@ -71,6 +71,12 @@
         </a>
       </div>
       <div id="onlineUsers">
+        <p>Users Online {{UsersOnline.length + 1}}</p>
+        <ul>
+          <li ng-repeat="UserOnline in UsersOnline">
+            {{UserOnline.userName}}
+          </li>
+        </ul>
       </div>
     </div>
     <script src="login.js"></script>
