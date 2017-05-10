@@ -12,7 +12,20 @@ function checkForFix(){
 }
 function sendMessageToDatabase(message){
 	var messageDB = firebase.database().ref('arcade/messaging');
-	console.log(messageDB.push(),message);
+	var theKey = messageDB.push().key;
+	if(currentUser){
+		var messageData = {
+			timestamp: new Date().getTime(),
+			msg: message,
+			from: currentUser.uid,
+			username: currentUser.displayName
+		};
+		if(!message.includes("script") && message.length > 0){
+			messageDB.child('message_'+theKey).set(messageData);
+		}
+	}else{
+		alert("You are not logged in.");
+	}
 }
 firebase.database().ref('arcade/platforms').on('value',function(data){
 	if(Platform){
