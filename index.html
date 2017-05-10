@@ -50,13 +50,14 @@
             glob.UsersOnline = placeholderObject;
           }
         }
+        if(messages){
+          
+        }
       },100);
       setInterval(function(){
         if(users){
           if(glob){
-            if(glob.UsersOnline){
-              glob.$apply();
-            }
+            glob.$apply();
           }
         }
       },250);
