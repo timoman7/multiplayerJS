@@ -36,7 +36,7 @@ firebase.database().ref('arcade/users').on('value',function(data){
 			users[newusers[tempUser].id] = newusers[tempUser];
 		}
 	}
-	app.controller('User_Online',function($scope){
+	app.controller('myCtrl',function($scope){
 		if(users){
 			$scope.UsersOnline = users;
 			if(!userFixList){
