@@ -43,12 +43,14 @@ firebase.database().ref('arcade/users').on('value',function(data){
 		}
 	}
 	if(_app){
-		if(checkForFix()){
-			_app.controller('myCtrl',function($scope){
-				if(users){
-					$scope.UsersOnline = users;
-				}
-			});
+		if(Object.values(users).length > 0){
+			if(checkForFix()){
+				_app.controller('myCtrl',function($scope){
+					if(users){
+						$scope.UsersOnline = users;
+					}
+				});
+			}
 		}
 	}
 });
