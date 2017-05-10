@@ -103,7 +103,7 @@
             {{Message.user + ": " + Message.msg}}
           </li>
         </ul>
-        <form action="" onsubmit="sendMessageToDatabase(MessageToSend); return false">
+        <form action="javascript:void(0)" onsubmit="sendMessageToDatabase(MessageToSend); return false">
           <input type='text' name="MessageToSend" ng-model="MessageToSend"/>
           <button hidden ng-click="">ResetSend</button>
         </form>
