@@ -42,6 +42,7 @@ firebase.database().ref('arcade/users').on('value',function(data){
 			users[newusers[tempUser].id] = newusers[tempUser];
 		}
 	}
+	/*
 	if(_app){
 		if(Object.values(users).length > 0){
 			if(checkForFix()){
@@ -53,6 +54,7 @@ firebase.database().ref('arcade/users').on('value',function(data){
 			}
 		}
 	}
+	*/
 });
 function playSound(theSound){
   if(theSound.isLoaded()){
@@ -1377,7 +1379,7 @@ function mouseReleased(){
 
 function setup(){
   createCanvas(1200,720);
-	_app = angular.module('Panel',[]);
+	//_app = angular.module('Panel',[]);
 	frameRate(60);
   colorMode(RGB);
   angleMode(DEGREES);
