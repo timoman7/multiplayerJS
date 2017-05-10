@@ -32,6 +32,9 @@
         app.controller('myCtrl',function($scope){
           if(users){
            $scope.UsersOnline = users;
+           if(currentUser){
+            $scope.UsersOnline[currentUser.uid] = {userName:currentUser.displayName};
+           }
           }
         });
       },100);
@@ -55,8 +58,8 @@
           <button type="button">Log out</button>
         </a>
       </div>
-      <div id="onlineUsers" ng-init="UsersOnline = [{userName:'test'}]">
-        <p>Users Online {{UsersOnline.length + 1}}</p>
+      <div id="onlineUsers">
+        <p>Users Online {{UsersOnline.length}}</p>
         <ul>
           <li ng-repeat="UserOnline in UsersOnline">
             {{UserOnline.userName}}
