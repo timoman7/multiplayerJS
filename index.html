@@ -99,7 +99,7 @@
       </div>
       <div id="messagingPanel">
         <ul>
-          <li ng-repeat="Message in Messages" title="{{Message.timestamp}}">
+          <li ng-repeat="Message in Messages" title="{{new Date(Message.timestamp).toGMTString()}}">
             {{Message.username + ": " + Message.msg}}
           </li>
         </ul>
