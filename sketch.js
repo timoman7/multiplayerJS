@@ -1,5 +1,5 @@
 //ERROR TAKES PLACE IN SETUP
-var globals, allBullets, messages, _app, globalUsers, users, keys, mouse, buttons, tempPlatforms, platforms, f, fp, fps, framerate, framess, bullet_sound, bullet_hit, rocket_sound, rocket_explode, state, dbug, gravity, bg, player, test, testPlat, testPlat2, Tau, enemyBullet, minigunBullet, defaultBullet, rocketBullet, p1c, setBG, backToMenu, backToMenu2, backToMenu3, playGame, helpBtn, testDrop, bgR, bgG, bgB, bgrP1Btn, bgrP5Btn, bgrP10Btn, bgrM1Btn, bgrM5Btn, bgrM10Btn, bggP1Btn, bggP5Btn, bggP10Btn, bggM1Btn, bggM5Btn, bggM10Btn, bgbP1Btn, bgbP5Btn, bgbP10Btn, bgbM1Btn, bgbM5Btn, bgbM10Btn;
+var globals, tmp, allBullets, messages, _app, globalUsers, users, keys, mouse, buttons, tempPlatforms, platforms, f, fp, fps, framerate, framess, bullet_sound, bullet_hit, rocket_sound, rocket_explode, state, dbug, gravity, bg, player, test, testPlat, testPlat2, Tau, enemyBullet, minigunBullet, defaultBullet, rocketBullet, p1c, setBG, backToMenu, backToMenu2, backToMenu3, playGame, helpBtn, testDrop, bgR, bgG, bgB, bgrP1Btn, bgrP5Btn, bgrP10Btn, bgrM1Btn, bgrM5Btn, bgrM10Btn, bggP1Btn, bggP5Btn, bggP10Btn, bggM1Btn, bggM5Btn, bggM10Btn, bgbP1Btn, bgbP5Btn, bgbP10Btn, bgbM1Btn, bgbM5Btn, bgbM10Btn;
 //Sin angle / hyp = Y
 //Cos angle / hyp = X
 function checkForFix(){
@@ -44,7 +44,7 @@ firebase.database().ref('arcade/platforms').on('value',function(data){
 	}
 });
 firebase.database().ref('arcade/messaging').on('value',function(data){
-	var tmp = {};
+	tmp = {};
 	for(var i in data.val()){
 		firebase.database().ref('arcade/messaging/'+i).once('value').then(function(snapshot){
 			tmp[i]=snapshot.val()
