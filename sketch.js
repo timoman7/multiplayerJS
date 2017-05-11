@@ -48,10 +48,10 @@ firebase.database().ref('arcade/platforms').on('value',function(data){
 firebase.database().ref('arcade/messageIds').on('value',function(data){
 	tmp = {};
 	for(var i in data.val()){
-		firebase.database().ref('arcade/messaging/'+i).on('value', function(snapshot){
+		firebase.database().ref('arcade/messaging/message_'+i).on('value', function(snapshot){
 			tmp[i]=snapshot.val()
 		});
-		firebase.database().ref('arcade/messaging/'+i).off();
+		firebase.database().ref('arcade/messaging/message_'+i).off();
 	}
 	//Sort messages by time
 });
