@@ -1478,13 +1478,13 @@ defaultBullet:{
 },
 rocketBullet:{
     speed:10,
-    damage:1,
-    rate:100,
+    damage:20,
+    rate:30,
     name:"rocket",
     type:"rocket",
     accuracy:90,
     force:20,
-    radius:250,
+    radius:125,
     fire_sound:rocket_sound,
     hit_sound:rocket_explode,
 }};
