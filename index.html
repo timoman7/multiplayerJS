@@ -101,7 +101,7 @@
         </ul>
       </div>
     <div id="messagingPanel" style="bottom: 10px; right: 0px; width: 320px; height: 50%; position: absolute; z-index: 25;">
-      <ul style="bottom: 10%; height: 90%; y-overflow: scroll">
+      <ul style="bottom: 10%; height: 90%; overflow-y: scroll">
         <li ng-repeat="Message in Messages" title="{{Message.timestampUTC}}">
           {{Message.username + ": " + Message.msg}}
         </li>
