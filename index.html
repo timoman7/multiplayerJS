@@ -50,7 +50,7 @@
           }
           if(glob){
             glob.UsersOnline = placeholderObject;
-            glob.UsersOnlineLength = placeholderObject.length;
+            glob.UsersOnlineLength = Object.values(placeholderObject).length;
           }
         }
         if(messaging){
