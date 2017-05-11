@@ -18,7 +18,7 @@ function sendMessageToDatabase(message){
 		var theTime = new Date().getTime();
 		var messageData = {
 			timestamp: theTime,
-			timestampUTC: theTime.toGMTString(),
+			timestampUTC: new Date(theTime).toGMTString(),
 			msg: message.value,
 			from: currentUser.uid,
 			username: currentUser.displayName
