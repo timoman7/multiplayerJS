@@ -63,11 +63,12 @@ setInterval(function(){
 	if(tmp){
 		messaging = tmp;
 		messaging.sort(function(a,b){
-			if(a.timeStamp>b.timeStamp){
-				return 1
-			}else if(a.timeStamp<b.timeStamp){
+			if(a.timestamp>b.timestamp){
 				return -1
+			}else if(a.timestamp<b.timestamp){
+				return 1
 			}
+			a.timestamp--;
 			return 0
 		});
 	}
