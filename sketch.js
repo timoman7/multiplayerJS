@@ -50,6 +50,9 @@ firebase.database().ref('arcade/messaging').on('value',function(data){
 			tmp[i]=snapshot.val()
 		});
 	}
+	//Sort messages by time
+});
+setInterval(function(){
 	messaging = Object.values(tmp);
 	messaging.sort(function(a,b){
 		if(a.timeStamp>b.timeStamp){
@@ -59,9 +62,7 @@ firebase.database().ref('arcade/messaging').on('value',function(data){
 		}
 		return 0
 	});
-	//Sort messages by time
-	
-});
+},75);
 firebase.database().ref('arcade/users').on('value',function(data){
 	users = {};
 	if(currentUser){
