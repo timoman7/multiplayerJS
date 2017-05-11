@@ -45,17 +45,15 @@ firebase.database().ref('arcade/platforms').on('value',function(data){
 		}
 	}
 });
-setInterval(function(){
-	firebase.database().ref('arcade/messageIds').once('value',function(data){
-		tmp = [];	
-		for(var i in data.val()){
-			firebase.database().ref('arcade/messaging/message_'+i).once('value', function(snapshot){
-				tmp.push(snapshot.val());
-			});
-		}
-		//Sort messages by time
-	});
-},75);
+firebase.database().ref('arcade/messageIds').on('value',function(data){
+	tmp = {};	
+	for(var i in data.val()){
+		firebase.database().ref('arcade/messaging/message_'+i).once('value', function(snapshot){
+			tmp[i]=snapshot.val();
+		});
+	}
+	//Sort messages by time
+});
 setInterval(function(){
 	if(tmp){
 		messaging = tmp;
