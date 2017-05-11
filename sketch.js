@@ -53,15 +53,17 @@ firebase.database().ref('arcade/messaging').on('value',function(data){
 	//Sort messages by time
 });
 setInterval(function(){
-	messaging = Object.values(tmp);
-	messaging.sort(function(a,b){
-		if(a.timeStamp>b.timeStamp){
-			return 1
-		}else if(a.timeStamp<b.timeStamp){
-			return -1
-		}
-		return 0
-	});
+	if(tmp){
+		messaging = Object.values(tmp);
+		messaging.sort(function(a,b){
+			if(a.timeStamp>b.timeStamp){
+				return 1
+			}else if(a.timeStamp<b.timeStamp){
+				return -1
+			}
+			return 0
+		});
+	}
 },75);
 firebase.database().ref('arcade/users').on('value',function(data){
 	users = {};
