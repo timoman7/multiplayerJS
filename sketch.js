@@ -15,7 +15,7 @@ function sendMessageToDatabase(message){
 	var theKey = messageDB.push().key;
 	console.log(message);
 	if(currentUser){
-		var theTime = new Date().getTime();
+		var theTime = Date.now();
 		var messageData = {
 			timestamp: theTime,
 			timestampUTC: new Date(theTime).toGMTString(),
