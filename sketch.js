@@ -44,7 +44,13 @@ firebase.database().ref('arcade/platforms').on('value',function(data){
 	}
 });
 firebase.database().ref('arcade/messaging').on('value',function(data){
-	messaging = Object.values(data.val());
+	var tmp = {};
+	for(var i in data.val()){
+		tmp[i]=firebase.database().ref('arcade/messaging/'+i).once('value').then(function(snapshot){
+			return snapshot.val()
+		});
+	}
+	messaging = Object.values(tmp);
 	messaging.sort(function(a,b){
 		if(a.timeStamp>b.timeStamp){
 			return 1
