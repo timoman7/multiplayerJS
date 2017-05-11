@@ -12,6 +12,7 @@ function checkForFix(){
 }
 function sendMessageToDatabase(message){
 	var messageDB = firebase.database().ref('arcade/messaging');
+	var messageDBIds = firebase.database().ref('arcade/messageIds');
 	var theKey = messageDB.push().key;
 	console.log(message);
 	if(currentUser){
@@ -25,6 +26,7 @@ function sendMessageToDatabase(message){
 		};
 		if(!message.value.includes("script") && message.value.length > 0){
 			messageDB.child('message_'+theKey).set(messageData);
+			messageDBIds.child(theKey).set(theKey);
 		}
 	}else{
 		alert("You are not logged in.");
@@ -43,7 +45,7 @@ firebase.database().ref('arcade/platforms').on('value',function(data){
 		}
 	}
 });
-firebase.database().ref('arcade/messaging').on('value',function(data){
+firebase.database().ref('arcade/messageIds').on('value',function(data){
 	tmp = {};
 	for(var i in data.val()){
 		firebase.database().ref('arcade/messaging/'+i).on('value', function(snapshot){
