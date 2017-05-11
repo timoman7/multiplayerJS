@@ -45,20 +45,17 @@ firebase.database().ref('arcade/platforms').on('value',function(data){
 		}
 	}
 });
-firebase.database().ref('arcade/messageIds').on('value',function(data){
-	tmp = [];
-	console.log(data.val());
-	
-	for(var i in data.val()){
-		console.log(i);
-		firebase.database().ref('arcade/messaging/message_'+i).once('value', function(snapshot){
-			console.log(snapshot.val());
-			tmp.push(snapshot.val());
-		});
-	}
-	console.log(tmp);
-	//Sort messages by time
-});
+setInterval(function(){
+	firebase.database().ref('arcade/messageIds').once('value',function(data){
+		tmp = [];	
+		for(var i in data.val()){
+			firebase.database().ref('arcade/messaging/message_'+i).once('value', function(snapshot){
+				tmp.push(snapshot.val());
+			});
+		}
+		//Sort messages by time
+	});
+},75);
 setInterval(function(){
 	if(tmp){
 		messaging = tmp;
