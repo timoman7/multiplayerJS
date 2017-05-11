@@ -46,22 +46,22 @@ firebase.database().ref('arcade/platforms').on('value',function(data){
 	}
 });
 firebase.database().ref('arcade/messageIds').on('value',function(data){
-	tmp = {};
+	tmp = [];
 	console.log(data.val());
 	
 	for(var i in data.val()){
 		console.log(i);
 		firebase.database().ref('arcade/messaging/message_'+i).once('value', function(snapshot){
 			console.log(snapshot.val());
-			tmp[i]=snapshot.val();
+			tmp.push(snapshot.val());
 		});
 	}
-		console.log(tmp);
+	console.log(tmp);
 	//Sort messages by time
 });
 setInterval(function(){
 	if(tmp){
-		messaging = Object.values(tmp);
+		messaging = tmp;
 		messaging.sort(function(a,b){
 			if(a.timeStamp>b.timeStamp){
 				return 1
