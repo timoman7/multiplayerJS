@@ -1879,6 +1879,12 @@ function draw(){
 			player.id = currentUser.uid;
 			player.userName = currentUser.displayName;
 		}
+		if(!globals.includes(player)){
+			player.HP = 100;
+			player.pos.x = random(0, width);
+			player.pos.y = random(0, height);
+			globals.push(player);
+		}
 	}
         background(bg);
         fpsScript();
