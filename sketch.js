@@ -15,8 +15,10 @@ function sendMessageToDatabase(message){
 	var theKey = messageDB.push().key;
 	console.log(message);
 	if(currentUser){
+		var theTime = new Date().getTime();
 		var messageData = {
-			timestamp: new Date().getTime(),
+			timestamp: theTime,
+			timestampUTC: theTime.toGMTString(),
 			msg: message.value,
 			from: currentUser.uid,
 			username: currentUser.displayName
