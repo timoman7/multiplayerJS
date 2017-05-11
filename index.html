@@ -74,8 +74,8 @@
     <script src="libraries/p5.dom.js" type="text/javascript"></script>
     <script src="libraries/p5.sound.js" type="text/javascript"></script>
   </head>
-  <body>
-    <div style="background-color: RGBA(0,0,0,0); right: 0px; top: 0px; position:absolute; z-index:25; height: 15%" ng-app="Panel" ng-controller="myCtrl">
+  <body ng-app="Panel" ng-controller="myCtrl">
+    <div style="background-color: RGBA(0,0,0,0); right: 0px; top: 0px; position:absolute; z-index:25; height: 15%">
       <div id="Button_Holder">
         <a class="Login" onclick="signInWithGoogle(); return false;">
           <button type="button">Sign in with Google</button>
