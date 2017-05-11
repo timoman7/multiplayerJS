@@ -47,12 +47,16 @@ firebase.database().ref('arcade/platforms').on('value',function(data){
 });
 firebase.database().ref('arcade/messageIds').on('value',function(data){
 	tmp = {};
+	console.log(data.val());
+	
 	for(var i in data.val()){
-		firebase.database().ref('arcade/messaging/message_'+i).on('value', function(snapshot){
-			tmp[i]=snapshot.val()
+		console.log(i);
+		firebase.database().ref('arcade/messaging/message_'+i).once('value', function(snapshot){
+			console.log(snapshot.val());
+			tmp[i]=snapshot.val();
 		});
-		firebase.database().ref('arcade/messaging/message_'+i).off();
 	}
+		console.log(tmp);
 	//Sort messages by time
 });
 setInterval(function(){
