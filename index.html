@@ -100,7 +100,7 @@
       </div>
     <div id="messagingPanel" style="bottom: 0px; right: 0px; width: 200px; height: 50%; y-overflow">
       <ul style="bottom: 10%; height: 90%">
-        <li ng-repeat="Message in Messages" title="{{new Date(Message.timestamp).toGMTString()}}">
+        <li ng-repeat="Message in Messages" title="{{Message.timestampUTC}}">
           {{Message.username + ": " + Message.msg}}
         </li>
       </ul>
