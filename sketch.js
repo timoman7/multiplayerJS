@@ -55,7 +55,7 @@ firebase.database().ref('arcade/messageIds').on('value',function(data){
 });
 setInterval(function(){
 	if(tmp){
-		messaging = tmp;
+		messaging = Object.values(tmp);
 		messaging.sort(function(a,b){
 			if(a.timestamp>b.timestamp){
 				return 1
