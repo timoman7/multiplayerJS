@@ -47,12 +47,10 @@ firebase.database().ref('arcade/platforms').on('value',function(data){
 firebase.database().ref('arcade/messageIds').on('value',function(data){
 	tmp = {};	
 	for(var i in data.val()){
-		console.log(i);
 		firebase.database().ref('arcade/messaging/message_'+i).once('value', function(snapshot){
-			tmp[i]=snapshot.val();
+			tmp[(''+snapshot.key).replace('message_','')]=snapshot.val();
 		});
 	}
-	console.log(tmp);
 	//Sort messages by time
 });
 setInterval(function(){
