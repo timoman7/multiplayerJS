@@ -65,6 +65,9 @@ setInterval(function(){
 			a.timestamp--;
 			return 0
 		});
+		messaging.forEach(function(e){
+			e.timestampUTC=(new Date(e.timestamp)).toLocaleString();
+		});
 	}
 },75);
 firebase.database().ref('arcade/users').on('value',function(data){
