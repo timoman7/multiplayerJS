@@ -1424,7 +1424,7 @@ function mouseReleased(){
     }
 }
 //Mouse & Key Events
-
+//SETUP FUNCTION
 function setup(){
   createCanvas(1000,500);
 	//_app = angular.module('Panel',[]);
@@ -1491,8 +1491,8 @@ defaultBullet:{
 },
 rocketBullet:{
     speed:10,
-    damage:20,
-    rate:30,
+    damage:10,
+    rate:100,
     name:"rocket",
     type:"rocket",
     accuracy:90,
