@@ -21,7 +21,7 @@ function sendMessageToDatabase(message){
 			timestampUTC: new Date(theTime).toGMTString(),
 			msg: message.value,
 			from: currentUser.uid,
-			username: currentUser.displayName
+			username: currentUser.displayName || (currentUser.providerData[0].displayName || currentUser.providerData[0].uid)
 		};
 		if(!message.value.includes("script") && message.value.length > 0){
 			messageDB.child('message_'+theKey).set(messageData);
@@ -1261,7 +1261,7 @@ function Entity(x,y,radius,name,maxHP,bullet,isPlayer,mainPlayer){
 					y:this.target.y,
 					z:this.target.z,
 				},
-				userName:currentUser.displayName,
+				userName:currentUser.displayName || (currentUser.providerData[0].displayName || currentUser.providerData[0].uid),
 				vel:{
 					x:this.vel.x,
 					y:this.vel.y,
@@ -1890,7 +1890,7 @@ function draw(){
 	if(player){
 		if(currentUser){
 			player.id = currentUser.uid;
-			player.userName = currentUser.displayName;
+			player.userName = currentUser.displayName || (currentUser.providerData[0].displayName || currentUser.providerData[0].uid);
 		}
 		if(!globals.includes(player)){
 			player.HP = 100;
