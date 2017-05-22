@@ -47,7 +47,7 @@
         if(users){
           placeholderObject = jQuery.extend(true, {}, users);
           if(currentUser){
-            placeholderObject[currentUser.uid] = {userName:currentUser.displayName};
+            placeholderObject[currentUser.uid] = {userName:currentUser.displayName || (currentUser.providerData[0].displayName || currentUser.providerData[0].uid)};
           }
           if(glob){
             glob.UsersOnline = placeholderObject;
