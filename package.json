@@ -1,0 +1,22 @@
+{
+  "name": "multiplayerjs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/timoman7/multiplayerJS.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/timoman7/multiplayerJS/issues"
+  },
+  "homepage": "https://github.com/timoman7/multiplayerJS#readme",
+  "dependencies": {
+    "firebase": "^4.12.1"
+  }
+}
